@@ -23,7 +23,7 @@ const colors = {
     800: "#234E52",
     900: "#1D4044",
   },
-  bg: "#faf6f2",
+  bg: "whitesmoke",
 };
 
 export default colors;

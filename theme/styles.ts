@@ -2,7 +2,7 @@ const styles = {
   global: {
     body: {
       bgColor: "bg",
-      color: "primary.900",
+      color: "gray.800",
     },
     "*, *::before, &::after": {
       borderColor: "gray.300",
