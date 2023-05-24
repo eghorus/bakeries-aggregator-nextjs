@@ -3,6 +3,7 @@ import styles from "./styles";
 import colors from "./foundations/colors";
 import radii from "./foundations/radii";
 import typography from "./foundations/typography";
+import { buttonTheme } from "./components/button";
 import { headingTheme } from "./components/heading";
 
 const overrides = {
@@ -11,6 +12,7 @@ const overrides = {
   radii,
   ...typography,
   components: {
+    Button: buttonTheme,
     Heading: headingTheme,
   },
 };

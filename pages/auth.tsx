@@ -28,7 +28,7 @@ export default function Auth() {
         mx="auto"
         boxShadow="md"
         border="2px"
-        borderColor="gray.200"
+        borderColor="primary.900"
         borderRadius="md"
         px="8"
         py="16"

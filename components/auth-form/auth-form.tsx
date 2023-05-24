@@ -1,6 +1,6 @@
 import { Button, chakra } from "@chakra-ui/react";
 import useAuthForm from "./use-auth-form";
-import Input from "../input";
+import Input from "./input";
 
 type AuthFormProps = {
   type: "signin" | "signup";
@@ -52,7 +52,7 @@ export default function AuthForm({ type }: AuthFormProps) {
         )}
       </chakra.form>
 
-      <DevToolDrawer />
+      {/* <DevToolDrawer /> */}
     </>
   );
 }

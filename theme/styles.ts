@@ -5,7 +5,7 @@ const styles = {
       color: "gray.800",
     },
     "*, *::before, &::after": {
-      borderColor: "gray.300",
+      borderColor: "gray.400",
     },
   },
 };
