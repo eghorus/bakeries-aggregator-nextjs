@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>The Bakeries Aggregator</title>
-        <meta name="description" content="An online aggregator to discover and order products from bakery stores." />
+        <meta name="description" content="An online aggregator to discover and order products from bakery shops." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

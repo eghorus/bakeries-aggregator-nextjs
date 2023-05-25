@@ -11,7 +11,7 @@ const variantSolid = defineStyle((props) => {
   const colorHover = mode(`${c}.900`, "white")(props);
 
   return {
-    border: "2px solid transparent",
+    border: "1px solid transparent",
     bg: background,
     color: color,
     _hover: {

@@ -15,7 +15,6 @@ export default function AuthForm({ type }: AuthFormProps) {
         {type === "signup" && (
           <Input
             type="text"
-            size="lg"
             label="Full Name"
             isModified={Boolean(modifiedFields.name)}
             registerProps={register("name")}
@@ -25,7 +24,6 @@ export default function AuthForm({ type }: AuthFormProps) {
 
         <Input
           type="text"
-          size="lg"
           label="Email"
           isModified={Boolean(modifiedFields.email)}
           registerProps={register("email")}
@@ -34,7 +32,6 @@ export default function AuthForm({ type }: AuthFormProps) {
 
         <Input
           type="password"
-          size="lg"
           label="Password"
           isModified={Boolean(modifiedFields.password)}
           registerProps={register("password")}
@@ -42,11 +39,11 @@ export default function AuthForm({ type }: AuthFormProps) {
         />
 
         {type === "signup" ? (
-          <Button type="submit" size="lg">
+          <Button type="submit" py="5">
             Create Account
           </Button>
         ) : (
-          <Button type="submit" size="lg">
+          <Button type="submit" py="5">
             Login
           </Button>
         )}

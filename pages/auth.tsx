@@ -27,15 +27,15 @@ export default function Auth() {
         maxW="lg"
         mx="auto"
         boxShadow="md"
-        border="2px"
-        borderColor="primary.900"
+        border="1px"
+        borderColor="blackAlpha.400"
         borderRadius="md"
         px="8"
         py="16"
         bgColor="white"
       >
-        <Icon as={formType === "signup" ? FaUserPlus : FaUserShield} mb="4" boxSize="8" color="secondary.500" />
-        <Heading as="h2" size="h2" mb="8">
+        <Icon as={formType === "signup" ? FaUserPlus : FaUserShield} mb="4" boxSize="8" color="secondary.600" />
+        <Heading as="h2" size="h2" mb="10" textAlign="center">
           {formType === "signup" ? "Become A Member" : "Welcome Back"}
         </Heading>
 

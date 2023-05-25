@@ -1,10 +1,10 @@
 import Head from "next/head";
 
-export default function Store() {
+export default function shop() {
   return (
     <>
       <Head>
-        <title>Store | The Bakeries Aggregator</title>
+        <title>Shop | The Bakeries Aggregator</title>
       </Head>
 
       <div></div>

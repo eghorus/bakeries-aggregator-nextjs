@@ -9,9 +9,9 @@ import {
   InputRightElement,
   useBoolean,
 } from "@chakra-ui/react";
+import { FieldError, UseFormRegisterReturn } from "react-hook-form";
 import { IconType } from "react-icons";
 import { RiEyeLine, RiEyeOffLine, RiMailOpenLine, RiShieldUserLine } from "react-icons/ri";
-import { FieldError, UseFormRegisterReturn } from "react-hook-form";
 import { createSlug } from "@/helpers/string";
 
 type InputProps = {
@@ -41,7 +41,7 @@ export default function Input({ type, label, isModified = false, registerProps, 
       break;
   }
 
-  const floatedLabelStyles = { "& > label": { transform: "translate(-10%,-95%) scale(0.9)" } };
+  const floatedLabelStyles = { "& > label": { transform: "translate(-10%,-90%) scale(0.9)" } };
 
   return (
     <FormControl
@@ -53,13 +53,13 @@ export default function Input({ type, label, isModified = false, registerProps, 
       <FormLabel
         htmlFor={id}
         position="absolute"
-        top="2.5"
+        top="2"
         left="4"
         zIndex="2"
         borderRadius="md"
         px="1"
         bgColor="white"
-        color="gray.600"
+        color="blackAlpha.600"
         lineHeight="normal"
         pointerEvents="none"
         transitionDuration="fast"
@@ -73,7 +73,7 @@ export default function Input({ type, label, isModified = false, registerProps, 
             h="full"
             {...(isAPasswordInput ? { onClick: setIsPasswordVisible.toggle } : { pointerEvents: "none" })}
           >
-            <Icon as={isPasswordVisible ? RiEyeOffLine : RightIcon} color="gray.400" />
+            <Icon as={isPasswordVisible ? RiEyeOffLine : RightIcon} color="blackAlpha.400" />
           </InputRightElement>
         )}
       </InputGroup>
