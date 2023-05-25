@@ -8,10 +8,12 @@ import {
   DrawerHeader,
   DrawerOverlay,
   Flex,
+  Icon,
   IconButton,
 } from "@chakra-ui/react";
 import Logo from "./logo";
 import { MdClose } from "react-icons/md";
+import { RiStore2Line } from "react-icons/ri";
 
 type SideDrawerProps = {
   isOpen: boolean;
@@ -43,6 +45,7 @@ export default function SideDrawer({ isOpen, onClose }: SideDrawerProps) {
               as={NextLink}
               href="/shop"
               variant="ghost"
+              leftIcon={<Icon as={RiStore2Line} mb="0.5" />}
               alignSelf="center"
               my="12"
               border="1px"

@@ -6,6 +6,7 @@ export default function Logo() {
   return (
     <Flex as={NextLink} href="/" alignItems="center" gap="2.5">
       <Box
+        flexShrink="0"
         overflowX="clip"
         overflowY="visible"
         position="relative"
@@ -25,7 +26,7 @@ export default function Logo() {
           <Icon as={MdStar} boxSize="5" mt="-1" color="primary.100" />
         </Flex>
       </Box>
-      <Text color="secondary.600" fontSize="lg" fontWeight="semibold">
+      <Text py="2" color="secondary.600" fontSize={{ md: "lg" }} fontWeight="semibold" lineHeight="1.2">
         The Bakeries Aggregator
       </Text>
     </Flex>
