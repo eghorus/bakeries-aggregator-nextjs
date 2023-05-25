@@ -14,6 +14,7 @@ import {
 import Logo from "./logo";
 import { MdClose } from "react-icons/md";
 import { RiStore2Line } from "react-icons/ri";
+import Copyright from "./copyright";
 
 type SideDrawerProps = {
   isOpen: boolean;
@@ -64,8 +65,15 @@ export default function SideDrawer({ isOpen, onClose }: SideDrawerProps) {
             </Flex>
           </DrawerBody>
 
-          <DrawerFooter fontSize="sm" justifyContent="center" borderTop="1px" borderColor="blackAlpha.400">
-            <p>© The Bakeries Aggregator, 2023</p>
+          <DrawerFooter
+            justifyContent="center"
+            borderTop="1px"
+            borderColor="blackAlpha.400"
+            bgColor="blackAlpha.900"
+            color="white"
+            fontSize="sm"
+          >
+            <Copyright />
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

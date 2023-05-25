@@ -1,5 +1,6 @@
 import { Box, Grid } from "@chakra-ui/react";
 import Header from "./header";
+import Footer from "./footer";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -12,7 +13,7 @@ export default function Layout({ children }: LayoutProps) {
       <Box as="main" w="full" maxW="container.xl" mx="auto" mt="12" px="6" py="12">
         {children}
       </Box>
-      <div>Footer</div>
+      <Footer />
     </Grid>
   );
 }

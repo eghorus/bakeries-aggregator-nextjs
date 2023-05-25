@@ -2,7 +2,7 @@ import Head from "next/head";
 import NextLink from "next/link";
 import { NextRouter, useRouter } from "next/router";
 import { ParsedUrlQuery } from "querystring";
-import { Box, Heading, Icon, Link, Text } from "@chakra-ui/react";
+import { Flex, Heading, Icon, Link, Text } from "@chakra-ui/react";
 import { FaUserPlus, FaUserShield } from "react-icons/fa";
 import AuthForm from "@/components/auth-form/auth-form";
 
@@ -20,8 +20,7 @@ export default function Auth() {
         <title>Authentication | The Bakeries Aggregator</title>
       </Head>
 
-      <Box
-        display="flex"
+      <Flex
         flexDirection="column"
         alignItems="center"
         maxW="lg"
@@ -58,7 +57,7 @@ export default function Auth() {
             </>
           )}
         </Text>
-      </Box>
+      </Flex>
     </>
   );
 }
