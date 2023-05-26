@@ -1,7 +1,13 @@
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { DevTool } from "@hookform/devtools";
 import * as yup from "yup";
+
+export type FormData = {
+  name: string | undefined;
+  email: string;
+  password: string;
+};
 
 const useAuthForm = (formType: "signin" | "signup") => {
   const defaultValues = {
@@ -16,13 +22,11 @@ const useAuthForm = (formType: "signin" | "signup") => {
     .min(5, "Name must be 5 characters or more")
     .max(30, "Name must be 30 characters or less")
     .required("Name is required");
-
   const emailValidations = yup
     .string()
     .trim()
     .email("Email must be a valid email address")
     .required("Email is required");
-
   const passwordValidations = yup
     .string()
     .trim()
@@ -36,24 +40,21 @@ const useAuthForm = (formType: "signin" | "signup") => {
     password: passwordValidations,
   });
 
-  type FormDataType = yup.InferType<typeof schema>;
-
   const {
     control,
     register,
     handleSubmit,
-    formState: { errors, dirtyFields },
-  } = useForm<FormDataType>({
+    reset,
+    formState: { isSubmitting, errors, dirtyFields },
+  } = useForm<FormData>({
     defaultValues,
     delayError: 500,
     resolver: yupResolver(schema),
   });
 
-  const submitData: SubmitHandler<FormDataType> = (data) => console.log(data);
-
   const DevToolDrawer = () => <DevTool control={control} />;
 
-  return { register, handleFormSubmit: handleSubmit(submitData), errors, modifiedFields: dirtyFields, DevToolDrawer };
+  return { register, handleSubmit, reset, isSubmitting, errors, modifiedFields: dirtyFields, DevToolDrawer };
 };
 
 export default useAuthForm;

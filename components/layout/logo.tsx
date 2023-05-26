@@ -10,6 +10,7 @@ export default function Logo() {
         overflowX="clip"
         overflowY="visible"
         position="relative"
+        zIndex="1"
         _after={{
           content: '""',
           position: "absolute",

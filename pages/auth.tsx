@@ -25,7 +25,7 @@ export default function Auth() {
         alignItems="center"
         maxW="lg"
         mx="auto"
-        boxShadow="md"
+        boxShadow="sm"
         border="1px"
         borderColor="blackAlpha.400"
         borderRadius="md"

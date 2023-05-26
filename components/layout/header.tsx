@@ -9,7 +9,8 @@ export default function Header() {
 
   return (
     <chakra.header
-      position="fixed"
+      position="sticky"
+      top="0"
       w="full"
       boxShadow="md"
       borderBottom="1px"
