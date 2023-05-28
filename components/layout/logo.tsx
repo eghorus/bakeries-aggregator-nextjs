@@ -19,6 +19,7 @@ export default function Logo() {
           zIndex: "-1",
           transform: "rotate(45deg)",
           boxSize: "12",
+          boxShadow: "md",
           bgColor: "primary.500",
         }}
       >
