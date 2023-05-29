@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Avatar, Box, chakra, Flex, HStack, Heading } from "@chakra-ui/react";
+import { getImageUrl } from "@/helpers/url";
 import RatingStars from "./rating-stars";
 
 type HeaderProps = {
@@ -8,21 +9,23 @@ type HeaderProps = {
     logo: string;
     cover: string;
   };
+  ratingAvg: number;
+  ratingQty: number;
   title: string;
 };
 
-const Header = ({ categories, images, title }: HeaderProps) => {
-  const coverImgSrc = `${process.env.NEXT_PUBLIC_CLOUDINARY_URL}/${images.cover}`;
-  const logoImgSrc = `${process.env.NEXT_PUBLIC_CLOUDINARY_URL}/${images.logo}`;
+const Header = ({ categories, images, ratingAvg, ratingQty, title }: HeaderProps) => {
+  const coverImgSrc = getImageUrl(images.cover);
+  const logoImgSrc = getImageUrl(images.logo);
 
   return (
     <chakra.header>
-      <Box position="relative" w="full" h="40" overflow="hidden" borderTopRadius="xl">
+      <Box position="relative" w="full" h="44" overflow="hidden" borderTopRadius="xl">
         <Image src={coverImgSrc} alt={title} fill style={{ objectFit: "cover" }} />
       </Box>
 
-      <Box px="6" py="3">
-        <Flex gap="6" alignItems="flex-start" borderBottom="1px" borderColor="blackAlpha.100" pb="3">
+      <Box px="6" py="4">
+        <Flex gap="6" alignItems="flex-start">
           <Avatar
             name={title}
             src={logoImgSrc}
@@ -62,9 +65,7 @@ const Header = ({ categories, images, title }: HeaderProps) => {
                 </Box>
               ))}
             </HStack>
-            <HStack>
-              <RatingStars ratingAvg={2.5} ratingQty={0} />
-            </HStack>
+            <RatingStars ratingAvg={ratingAvg} ratingQty={ratingQty} />
           </Flex>
         </Flex>
       </Box>

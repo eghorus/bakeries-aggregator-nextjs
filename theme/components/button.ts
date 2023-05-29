@@ -7,8 +7,8 @@ const variantSolid = defineStyle((props) => {
   const background = mode(`${c}.500`, `${c}.200`)(props);
   const backgroundHover = mode(`${c}.200`, `${c}.500`)(props);
   const backgroundActive = mode(`${c}.100`, `${c}.600`)(props);
-  const color = mode("white", `${c}.900`)(props);
-  const colorHover = mode(`${c}.900`, "white")(props);
+  const color = mode("white", "inherit")(props);
+  const colorHover = mode("inherit", "white")(props);
 
   return {
     border: "1px solid transparent",

@@ -1,11 +1,11 @@
 import type { GetStaticProps, GetStaticPaths } from "next";
 import Head from "next/head";
-import Image from "next/image";
-import { Box, chakra, Flex, Heading } from "@chakra-ui/react";
+import { Box, chakra, Flex } from "@chakra-ui/react";
 import axios from "axios";
 import { Bakery } from "@/models/Bakery";
-import { Product } from "@/models/Product";
+import { CategorizedProducts } from "@/models/CategorizedProducts";
 import Header from "@/components/bakery-view/header";
+import Menu from "@/components/bakery-view/menu";
 
 type BakeryPageProps = {
   bakery: Bakery;
@@ -13,11 +13,10 @@ type BakeryPageProps = {
 
 export default function BakeryPage({ bakery }: BakeryPageProps) {
   const { id, images, products, ratingAvg, ratingQty, title } = bakery;
-
-  const productsCategorized: { [key: string]: Product[] } = {};
+  const categorizedProducts: CategorizedProducts = {};
   products.forEach((p) => {
-    if (!productsCategorized[p.category]) productsCategorized[p.category] = [];
-    productsCategorized[p.category].push(p);
+    if (!categorizedProducts[p.category]) categorizedProducts[p.category] = [];
+    categorizedProducts[p.category].push(p);
   });
 
   return (
@@ -27,12 +26,20 @@ export default function BakeryPage({ bakery }: BakeryPageProps) {
       </Head>
 
       <Flex gap="6">
-        <Box maxW="64" w="full">
+        <Box w="full" maxW="64" bgColor="gray.200">
           Side
         </Box>
 
         <chakra.section w="full">
-          <Header categories={Object.keys(productsCategorized)} images={images} title={title} />
+          <Header
+            categories={Object.keys(categorizedProducts)}
+            images={images}
+            ratingAvg={ratingAvg}
+            ratingQty={ratingQty}
+            title={title}
+          />
+
+          <Menu categorizedProducts={categorizedProducts} />
         </chakra.section>
       </Flex>
     </>

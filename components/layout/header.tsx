@@ -11,6 +11,7 @@ export default function Header() {
     <chakra.header
       position="sticky"
       top="0"
+      zIndex="banner"
       w="full"
       boxShadow="sm"
       borderBottom="1px"

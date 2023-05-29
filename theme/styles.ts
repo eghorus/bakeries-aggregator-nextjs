@@ -1,10 +1,13 @@
 const styles = {
   global: {
+    html: {
+      fontSize: "87.5%",
+    },
     body: {
       bgColor: "bg",
     },
     "*, *::before, &::after": {
-      borderColor: "blackAlpha.400",
+      borderColor: "blackAlpha.200",
     },
   },
 };
