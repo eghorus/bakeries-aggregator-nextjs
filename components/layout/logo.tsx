@@ -4,7 +4,7 @@ import { MdBakeryDining, MdStar } from "react-icons/md";
 
 export default function Logo() {
   return (
-    <Flex as={NextLink} href="/" alignItems="center" gap="2.5">
+    <Flex as={NextLink} href="/" alignItems="center" gap="4">
       <Box
         flexShrink="0"
         overflowX="clip"
@@ -28,8 +28,16 @@ export default function Logo() {
           <Icon as={MdStar} boxSize="5" mt="-1" color="primary.100" />
         </Flex>
       </Box>
-      <Text py="2" color="secondary.600" fontSize={{ md: "lg" }} fontWeight="semibold" lineHeight="1.2">
-        The Bakeries Aggregator
+      <Text
+        py="2"
+        color="secondary.600"
+        fontSize={{ md: "lg" }}
+        fontWeight="semibold"
+        lineHeight="1.2"
+        letterSpacing="0.07rem"
+        textTransform="uppercase"
+      >
+        Bakeries Aggregator
       </Text>
     </Flex>
   );

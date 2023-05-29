@@ -10,14 +10,14 @@ interface AuthPageQuery extends ParsedUrlQuery {
   form?: "signin" | "signup";
 }
 
-export default function Auth() {
+export default function AuthPage() {
   const { query }: NextRouter & { query: AuthPageQuery } = useRouter();
   const { form: formType = "signin" } = query;
 
   return (
     <>
       <Head>
-        <title>Authentication | The Bakeries Aggregator</title>
+        <title>{`${formType === "signup" ? "Sign Up" : "Sign In"} | Bakeries Aggregator`}</title>
       </Head>
 
       <Flex

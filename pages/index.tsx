@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>The Bakeries Aggregator</title>
+        <title>Bakeries Aggregator</title>
       </Head>
 
       <div></div>

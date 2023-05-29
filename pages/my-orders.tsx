@@ -4,7 +4,7 @@ export default function MyOrders() {
   return (
     <>
       <Head>
-        <title>My Orders | The Bakeries Aggregator</title>
+        <title>My Orders | Bakeries Aggregator</title>
       </Head>
 
       <div></div>

@@ -12,7 +12,7 @@ export default function Header() {
       position="sticky"
       top="0"
       w="full"
-      boxShadow="md"
+      boxShadow="sm"
       borderBottom="1px"
       borderColor="blackAlpha.400"
       bgColor="white"
