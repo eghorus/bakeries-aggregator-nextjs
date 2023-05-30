@@ -16,7 +16,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
     <Flex
       flexDirection="column"
       justifyContent="flex-start"
-      w="150px"
+      w="170px"
       overflow="hidden"
       border="2px"
       borderColor="blackAlpha.200"
@@ -28,7 +28,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
         borderColor: "secondary.600",
       }}
     >
-      <Box position="relative" w="150px" h="150px">
+      <Box position="relative" w="170px" h="170px">
         <Image src={imageUrl} alt={title} fill style={{ objectFit: "cover" }} />
       </Box>
       <Flex flexGrow="1" flexDirection="column" justifyContent="space-between" gap="2" p="2">

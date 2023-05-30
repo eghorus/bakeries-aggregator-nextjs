@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { useRouter } from "next/router";
-import { Button, Flex, Input, useNumberInput, VStack } from "@chakra-ui/react";
+import { Button, Flex, Input, useNumberInput } from "@chakra-ui/react";
 import { Product } from "@/models/Product";
 import { CartProduct } from "@/models/CartProduct";
 import { AuthContext } from "@/store/auth-context";
@@ -49,20 +49,20 @@ const AddToCartButton = ({ product }: AddToCartButtonProps) => {
 
   return (
     <>
-      <VStack>
+      <Flex gap="2">
         <Flex gap="1">
-          <Button colorScheme="blackAlpha" size="sm" variant="outline" fontSize="md" {...getIncrementButtonProps()}>
+          <Button colorScheme="secondary" size="sm" variant="outline" fontSize="md" {...getIncrementButtonProps()}>
             +
           </Button>
-          <Input size="sm" {...getInputProps()} />
-          <Button colorScheme="blackAlpha" size="sm" variant="outline" fontSize="md" {...getDecrementButtonProps()}>
+          <Input size="sm" maxW="10" {...getInputProps()} />
+          <Button colorScheme="secondary" size="sm" variant="outline" fontSize="md" {...getDecrementButtonProps()}>
             -
           </Button>
         </Flex>
-        <Button size="sm" variant="outline" w="full" onClick={handleAddToCart}>
+        <Button size="sm" onClick={handleAddToCart}>
           Add
         </Button>
-      </VStack>
+      </Flex>
 
       <ConfirmModal />
     </>

@@ -13,7 +13,7 @@ const ProductsCategory = ({ title, products }: ProductsCategoryProps) => {
       <Heading as="h4" size="h5" px="4" py="2" bgColor="gray.200">
         {title}
       </Heading>
-      <Grid gridTemplateColumns="repeat(auto-fill, minmax(10rem, 1fr))" gap="6" p="4">
+      <Grid gridTemplateColumns="repeat(auto-fill, minmax(170px, 1fr))" gap="6" p="4">
         {products.map((p, i) => (
           <ProductCard key={i} product={p} />
         ))}
