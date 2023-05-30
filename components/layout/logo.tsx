@@ -2,7 +2,7 @@ import NextLink from "next/link";
 import { Box, Flex, Icon, Text } from "@chakra-ui/react";
 import { MdBakeryDining, MdStar } from "react-icons/md";
 
-export default function Logo() {
+const Logo = () => {
   return (
     <Flex as={NextLink} href="/" alignItems="center" gap="4">
       <Box
@@ -41,4 +41,6 @@ export default function Logo() {
       </Text>
     </Flex>
   );
-}
+};
+
+export default Logo;

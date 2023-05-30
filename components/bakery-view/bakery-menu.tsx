@@ -2,11 +2,11 @@ import { Box, Heading } from "@chakra-ui/react";
 import { CategorizedProducts } from "@/models/CategorizedProducts";
 import ProductsCategory from "./products-category";
 
-type MenuProps = {
+type BakeryMenuProps = {
   categorizedProducts: CategorizedProducts;
 };
 
-const Menu = ({ categorizedProducts }: MenuProps) => {
+const BakeryMenu = ({ categorizedProducts }: BakeryMenuProps) => {
   return (
     <Box overflow="hidden" my="4" border="1px" borderColor="blackAlpha.200" borderRadius="lg">
       <Heading as="h3" size="h3" px="6" py="6" bgColor="white" color="primary.600">
@@ -20,4 +20,4 @@ const Menu = ({ categorizedProducts }: MenuProps) => {
   );
 };
 
-export default Menu;
+export default BakeryMenu;

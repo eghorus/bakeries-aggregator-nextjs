@@ -1,24 +1,37 @@
-import { useState } from "react";
-import { ModalStatus } from "@/models/ModalStatus";
+import { useCallback, useState } from "react";
 import Modal from "@/components/modal";
+import { isAxiosError } from "axios";
 
 const useModal = () => {
-  const modalDefaultState = { isModalOpen: false, status: "" as ModalStatus, heading: "", body: "" };
-  const [modalState, setModalState] = useState(modalDefaultState);
+  const modalInitialState = { heading: "", body: "" };
+  const [modalState, setModalState] = useState(modalInitialState);
+
+  type HandleOpenModalArgs = {
+    heading?: string;
+    body?: string;
+    error?: unknown;
+  };
+
+  const handleOpenModal = useCallback(({ heading, body, error }: HandleOpenModalArgs) => {
+    if (error) {
+      let message = "Something went wrong. Please try again.";
+      if (isAxiosError(error)) message = error.response?.data.message;
+      setModalState({ heading: "Error", body: message });
+      return;
+    }
+
+    if (heading && body) {
+      setModalState({ heading, body });
+    }
+  }, []);
 
   const ModalComponent = () => {
     return (
-      <Modal
-        isOpen={modalState.isModalOpen}
-        onClose={() => setModalState(modalDefaultState)}
-        status={modalState.status}
-        heading={modalState.heading}
-        body={modalState.body}
-      />
+      <Modal onClose={() => setModalState(modalInitialState)} heading={modalState.heading} body={modalState.body} />
     );
   };
 
-  return { ModalComponent, modalState, setModalState };
+  return { ModalComponent, handleOpenModal };
 };
 
 export default useModal;

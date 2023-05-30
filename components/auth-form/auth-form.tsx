@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { Button, chakra } from "@chakra-ui/react";
 import { SubmitHandler } from "react-hook-form";
 import axios, { AxiosError } from "axios";
-import { AuthContext } from "@/app-state/auth-context";
+import { AuthContext } from "@/store/auth-context";
 import useAuthForm, { FormData } from "./use-auth-form";
 import useModal from "@/hooks/use-modal";
 import Input from "./input";
@@ -16,7 +16,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
   const { storeAuthToken } = useContext(AuthContext);
   const router = useRouter();
   const { register, handleSubmit, reset, isSubmitting, errors, modifiedFields, DevToolDrawer } = useAuthForm(type);
-  const { ModalComponent: Modal, setModalState } = useModal();
+  const { ModalComponent: Modal, handleOpenModal } = useModal();
 
   const handleSignUp: SubmitHandler<FormData> = async (data) => {
     const { name, email, password } = data;
@@ -26,20 +26,14 @@ const AuthForm = ({ type }: AuthFormProps) => {
         url: `${process.env.NEXT_PUBLIC_API_URL}/users/signup`,
         data: { name, email, password },
       });
+      const { message } = response.data;
       reset();
-      setModalState({
-        isModalOpen: true,
-        status: "success",
+      handleOpenModal({
         heading: "Account Created!",
-        body: response.data.message,
+        body: message,
       });
     } catch (error) {
-      setModalState({
-        isModalOpen: true,
-        status: "error",
-        heading: "Error",
-        body: error instanceof AxiosError ? error.response?.data?.message : "Something went wrong. Please try again.",
-      });
+      handleOpenModal({ error });
     }
   };
 
@@ -51,16 +45,14 @@ const AuthForm = ({ type }: AuthFormProps) => {
         url: `${process.env.NEXT_PUBLIC_API_URL}/users/signin`,
         data: { email, password },
       });
-      storeAuthToken(response.data.data.accessToken);
+      const { data } = response.data;
+      storeAuthToken(data.accessToken);
       reset();
       router.push("/");
     } catch (error) {
-      setModalState({
-        isModalOpen: true,
-        status: "error",
-        heading: "Error",
-        body: error instanceof AxiosError ? error.response?.data?.message : "Something went wrong. Please try again.",
-      });
+      let message = "Something went wrong. Please try again.";
+      if (error instanceof AxiosError) message = error.response?.data.message;
+      handleOpenModal({ error });
     }
   };
 

@@ -2,7 +2,8 @@ import Head from "next/head";
 import type { AppProps } from "next/app";
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from "@/theme";
-import { AuthContextProvider } from "@/app-state/auth-context";
+import { AuthContextProvider } from "@/store/auth-context";
+import { CurrentUserContextProvider } from "@/store/current-user-context";
 import Layout from "@/components/layout/layout";
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -16,11 +17,13 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
 
       <AuthContextProvider>
-        <ChakraProvider theme={theme}>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </ChakraProvider>
+        <CurrentUserContextProvider>
+          <ChakraProvider theme={theme}>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </ChakraProvider>
+        </CurrentUserContextProvider>
       </AuthContextProvider>
     </>
   );

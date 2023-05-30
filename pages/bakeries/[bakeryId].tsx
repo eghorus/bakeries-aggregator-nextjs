@@ -5,7 +5,7 @@ import axios from "axios";
 import { Bakery } from "@/models/Bakery";
 import { CategorizedProducts } from "@/models/CategorizedProducts";
 import Header from "@/components/bakery-view/header";
-import Menu from "@/components/bakery-view/menu";
+import BakeryMenu from "@/components/bakery-view/bakery-menu";
 
 type BakeryPageProps = {
   bakery: Bakery;
@@ -39,7 +39,7 @@ export default function BakeryPage({ bakery }: BakeryPageProps) {
             title={title}
           />
 
-          <Menu categorizedProducts={categorizedProducts} />
+          <BakeryMenu categorizedProducts={categorizedProducts} />
         </chakra.section>
       </Flex>
     </>
