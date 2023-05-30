@@ -1,58 +1,56 @@
-import { Product } from "@/models/Product";
+import { CartProduct } from "@/models/CartProduct";
 
 /* Cart should include only products from the same bakery. */
-type State = {
+export type CartState = {
   bakeryId: string;
-  products: Product[];
-  addToCart: () => void;
-  removeFromCart: () => void;
-  emptyAndAddToCart: () => void;
-  emptyCart: () => void;
+  products: { [key: string]: CartProduct };
 };
 
-type Action =
-  | { type: "ADD_TO_CART"; payload: { product: Product } }
+type CartAction =
+  | { type: "ADD_TO_CART"; payload: { product: CartProduct } }
   | { type: "REMOVE_FROM_CART"; payload: { productId: string } }
-  | { type: "EMPTY_AND_ADD_TO_CART"; payload: { product: Product } }
   | { type: "EMPTY_CART" };
 
-export const initialState: State = {
+export const initialState: CartState = {
   bakeryId: "",
-  products: [],
-  addToCart: () => {},
-  removeFromCart: () => {},
-  emptyAndAddToCart: () => {},
-  emptyCart: () => {},
+  products: {},
 };
 
-export const cartReducer = (state: State, action: Action): State => {
+export const cartReducer = (state: CartState, action: CartAction): CartState => {
   switch (action.type) {
     case "ADD_TO_CART":
       /* To not allow the user to add a product by a different bakery. */
-      if (state.bakeryId !== action.payload.product.bakery) {
-        return { ...state };
-      } else {
+      if (state.bakeryId && state.bakeryId !== action.payload.product.bakery) {
+        return state;
+      }
+      /* If the product already exists in the cart, just increment the quantity property if it is below 10. */
+      if (state.products[action.payload.product.id]) {
+        let newQuantity = state.products[action.payload.product.id].quantity + action.payload.product.quantity;
+        if (newQuantity > 10) newQuantity = 10;
         return {
           ...state,
-          bakeryId: action.payload.product.bakery,
-          products: [...state.products, action.payload.product],
+          products: {
+            ...state.products,
+            [action.payload.product.id]: { ...state.products[action.payload.product.id], quantity: newQuantity },
+          },
         };
       }
-
-    case "REMOVE_FROM_CART":
-      return { ...state, products: state.products.filter((p) => p.id !== action.payload.productId) };
-
-    case "EMPTY_AND_ADD_TO_CART":
       return {
         ...state,
         bakeryId: action.payload.product.bakery,
-        products: [action.payload.product],
+        products: { ...state.products, [action.payload.product.id]: action.payload.product },
       };
+
+    case "REMOVE_FROM_CART":
+      if (state.products[action.payload.productId]) {
+        delete state.products[action.payload.productId];
+      }
+      return { ...state };
 
     case "EMPTY_CART":
       return { ...initialState };
 
     default:
-      return { ...state };
+      return state;
   }
 };

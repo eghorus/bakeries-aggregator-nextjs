@@ -30,7 +30,7 @@ const SideDrawer = ({ isOpen, onClose }: SideDrawerProps) => {
               colorScheme="blackAlpha"
               size="xs"
               variant="outline"
-              borderColor="blackAlpha.300"
+              borderColor="blackAlpha.200"
               borderRadius="full"
               onClick={onClose}
             />

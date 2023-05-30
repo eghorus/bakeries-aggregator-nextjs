@@ -10,10 +10,10 @@ type ProductsCategoryProps = {
 const ProductsCategory = ({ title, products }: ProductsCategoryProps) => {
   return (
     <Box>
-      <Heading as="h4" size="h5" px="6" py="4" bgColor="primary.100">
+      <Heading as="h4" size="h5" px="4" py="2" bgColor="gray.200">
         {title}
       </Heading>
-      <Grid gridTemplateColumns="repeat(auto-fill, minmax(10rem, 1fr))" gap="8" p="6">
+      <Grid gridTemplateColumns="repeat(auto-fill, minmax(10rem, 1fr))" gap="6" p="4">
         {products.map((p, i) => (
           <ProductCard key={i} product={p} />
         ))}

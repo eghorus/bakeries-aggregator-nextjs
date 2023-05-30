@@ -23,7 +23,7 @@ import SideDrawer from "./side-drawer/side-drawer";
 const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { products } = useContext(CartContext);
-  const cartProductsCount = products.length;
+  const cartProductsCount = Object.keys(products).length;
 
   return (
     <chakra.header

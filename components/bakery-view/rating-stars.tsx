@@ -15,7 +15,15 @@ const RatingStars = ({ ratingAvg, ratingQty }: RatingStarsProps) => {
 
   return (
     <HStack alignItems="flex-end" px="1" fontSize="sm">
-      <chakra.span borderRadius="2xl" p="1.5" bgColor="red.500" color="white" fontWeight="medium">
+      <chakra.span
+        minW="8"
+        borderRadius="2xl"
+        p="1.5"
+        bgColor={roundedRatingAvg > 1 ? "red.500" : "red.200"}
+        color="white"
+        fontWeight="medium"
+        textAlign="center"
+      >
         {roundedRatingAvg}
       </chakra.span>
       <HStack spacing="1">
@@ -32,10 +40,10 @@ const RatingStars = ({ ratingAvg, ratingQty }: RatingStarsProps) => {
         {Array(emptyStarsCount)
           .fill(1)
           .map((_, i) => (
-            <Icon key={i} as={MdStarOutline} color="blackAlpha.300" boxSize="6" />
+            <Icon key={i} as={MdStarOutline} color="blackAlpha.400" boxSize="6" />
           ))}
       </HStack>
-      <chakra.span>
+      <chakra.span color="blackAlpha.600">
         ({ratingQty} rating{ratingQty > 1 && "s"})
       </chakra.span>
     </HStack>
