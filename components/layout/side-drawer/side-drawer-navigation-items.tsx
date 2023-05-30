@@ -40,10 +40,10 @@ const SideDrawerNavigationItems = ({ onSideDrawerClose }: SideDrawerNavigationIt
     </>
   ) : (
     <>
-      <Button as={NextLink} href="/auth?form=signin" size="sm" variant="outline" onClick={onSideDrawerClose}>
+      <Button as={NextLink} href="/auth?form=signin" variant="outline" w="full" mb="4" onClick={onSideDrawerClose}>
         Sign In
       </Button>
-      <Button as={NextLink} href="/auth?form=signup" size="xs" onClick={onSideDrawerClose}>
+      <Button as={NextLink} href="/auth?form=signup" w="full" onClick={onSideDrawerClose}>
         Create Account
       </Button>
     </>

@@ -4,6 +4,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import theme from "@/theme";
 import { AuthContextProvider } from "@/store/auth-context";
 import { CurrentUserContextProvider } from "@/store/current-user-context";
+import { CartContextProvider } from "@/store/cart-context";
 import Layout from "@/components/layout/layout";
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -18,11 +19,13 @@ export default function App({ Component, pageProps }: AppProps) {
 
       <AuthContextProvider>
         <CurrentUserContextProvider>
-          <ChakraProvider theme={theme}>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </ChakraProvider>
+          <CartContextProvider>
+            <ChakraProvider theme={theme}>
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </ChakraProvider>
+          </CartContextProvider>
         </CurrentUserContextProvider>
       </AuthContextProvider>
     </>
