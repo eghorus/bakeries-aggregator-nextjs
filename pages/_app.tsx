@@ -2,6 +2,7 @@ import Head from "next/head";
 import type { AppProps } from "next/app";
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from "@/theme";
+import { AuthContextProvider } from "@/app-state/auth-context";
 import Layout from "@/components/layout/layout";
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -14,11 +15,13 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <ChakraProvider theme={theme}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </ChakraProvider>
+      <AuthContextProvider>
+        <ChakraProvider theme={theme}>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </ChakraProvider>
+      </AuthContextProvider>
     </>
   );
 }

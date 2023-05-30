@@ -32,7 +32,7 @@ export default function Logo() {
         py="2"
         color="secondary.600"
         fontSize={{ md: "lg" }}
-        fontWeight="semibold"
+        fontWeight="black"
         lineHeight="1.2"
         letterSpacing="0.07rem"
         textTransform="uppercase"

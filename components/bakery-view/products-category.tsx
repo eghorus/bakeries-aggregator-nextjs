@@ -10,7 +10,7 @@ type ProductsCategoryProps = {
 const ProductsCategory = ({ title, products }: ProductsCategoryProps) => {
   return (
     <Box>
-      <Heading as="h4" size="h5" px="6" py="4" bgColor="primary.50">
+      <Heading as="h4" size="h5" px="6" py="4" bgColor="primary.100">
         {title}
       </Heading>
       <Grid gridTemplateColumns="repeat(auto-fill, minmax(10rem, 1fr))" gap="8" p="6">

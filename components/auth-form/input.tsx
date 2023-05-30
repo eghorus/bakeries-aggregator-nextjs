@@ -23,7 +23,7 @@ type InputProps = {
   size?: "xs" | "sm" | "md" | "lg";
 };
 
-export default function Input({ type, label, isModified = false, registerProps, error, size }: InputProps) {
+const Input = ({ type, label, isModified = false, registerProps, error, size }: InputProps) => {
   const [isPasswordVisible, setIsPasswordVisible] = useBoolean();
   const id = useMemo(() => createSlug(label), [label]);
   const isAPasswordInput = label.toLowerCase().includes("password");
@@ -41,7 +41,7 @@ export default function Input({ type, label, isModified = false, registerProps, 
       break;
   }
 
-  const floatedLabelStyles = { "& > label": { transform: "translate(-10%,-90%) scale(0.9)" } };
+  const floatedLabelStyles = { "& > label": { transform: "translate(-10%,-95%) scale(0.9)" } };
 
   return (
     <FormControl
@@ -67,7 +67,7 @@ export default function Input({ type, label, isModified = false, registerProps, 
         {label}
       </FormLabel>
       <InputGroup>
-        <ChakraInput id={id} type={isPasswordVisible ? "text" : type} size={size} {...registerProps} />
+        <ChakraInput id={id} type={isPasswordVisible ? "text" : type} size={size} py="5" {...registerProps} />
         {RightIcon && (
           <InputRightElement
             h="full"
@@ -80,4 +80,6 @@ export default function Input({ type, label, isModified = false, registerProps, 
       <FormErrorMessage>{error && error.message}</FormErrorMessage>
     </FormControl>
   );
-}
+};
+
+export default Input;

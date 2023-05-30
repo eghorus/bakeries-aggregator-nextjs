@@ -9,7 +9,7 @@ type MenuProps = {
 const Menu = ({ categorizedProducts }: MenuProps) => {
   return (
     <Box overflow="hidden" my="4" border="1px" borderColor="blackAlpha.200" borderRadius="lg">
-      <Heading as="h3" size="h3" px="6" py="6" color="primary.600">
+      <Heading as="h3" size="h3" px="6" py="6" bgColor="white" color="primary.600">
         Menu
       </Heading>
 

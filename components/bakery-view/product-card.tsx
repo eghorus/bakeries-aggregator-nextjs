@@ -18,14 +18,21 @@ const ProductCard = ({ product }: ProductCardProps) => {
       justifyContent="flex-start"
       w="150px"
       overflow="hidden"
-      border="1px"
+      border="2px"
       borderColor="blackAlpha.200"
       borderRadius="lg"
+      bgColor="white"
+      transitionProperty="all"
+      transitionDuration="normal"
+      _hover={{
+        borderColor: "secondary.600",
+        bgColor: "secondary.50",
+      }}
     >
-      <Box position="relative" w="150px" h="225px">
-        <Image src={imageUrl} alt={title} fill style={{ objectFit: "contain" }} />
+      <Box position="relative" w="150px" h="175px">
+        <Image src={imageUrl} alt={title} fill style={{ objectFit: "cover" }} />
       </Box>
-      <Flex flexGrow="1" flexDirection="column" justifyContent="space-between" gap="2" p="2" pb="4">
+      <Flex flexGrow="1" flexDirection="column" justifyContent="space-between" gap="2" p="4">
         <chakra.span fontWeight="semibold">{title}</chakra.span>
         <Flex justifyContent="space-between" alignItems="flex-end" flexWrap="wrap">
           <chakra.span color="secondary.700" fontWeight="medium">
