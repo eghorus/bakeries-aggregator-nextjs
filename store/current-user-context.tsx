@@ -3,7 +3,7 @@ import { User } from "@/models/User";
 
 type ContextValue = {
   currentUser: User | null;
-  setCurrentUser: (user: User) => void;
+  setCurrentUser: (user: User | null) => void;
 };
 
 const initialContext: ContextValue = {
