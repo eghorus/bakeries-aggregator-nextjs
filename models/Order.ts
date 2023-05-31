@@ -1,11 +1,12 @@
-import { Product } from "./Product";
+import { CartProduct } from "./CartProduct";
 import { Bakery } from "./Bakery";
 
-export type Order = {
-  date: Date;
-  products: Product[];
+export type OrderType = {
+  id: string;
+  date: string;
+  products: CartProduct[];
   isCompleted: boolean;
   rating: number;
-  user: string;
   bakery: Bakery;
+  user: string;
 };

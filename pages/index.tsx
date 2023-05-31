@@ -16,9 +16,7 @@ export default function HomePage({ bakeries }: HomePageProps) {
         <title>Bakeries Aggregator</title>
       </Head>
 
-      <Box>
-        <BakeriesDirectory bakeries={bakeries} />
-      </Box>
+      <BakeriesDirectory bakeries={bakeries} />
     </>
   );
 }

@@ -12,7 +12,7 @@ import {
 type ConfirmModalProps = {
   heading: string;
   message: string;
-  confirmButtonTitle: string | undefined;
+  confirmButtonTitle?: string;
   onConfirm: React.MouseEventHandler<HTMLButtonElement>;
   onClose: () => void;
 };

@@ -33,14 +33,14 @@ const Header = ({ categories, images, ratingAvg, ratingQty, title }: HeaderProps
             position="relative"
             transform="translateY(-2rem)"
             outline="0.5rem solid"
-            outlineColor="bg"
+            outlineColor="white"
             _before={{
               content: "''",
               position: "absolute",
               zIndex: "-1",
               w: "calc(100% + 0.5rem)",
               h: "calc(100% + 0.5rem)",
-              bgColor: "bg",
+              bgColor: "white",
               borderRadius: "full",
             }}
           />
@@ -57,7 +57,7 @@ const Header = ({ categories, images, ratingAvg, ratingQty, title }: HeaderProps
                   borderRadius="xl"
                   px="1.5"
                   py="0.5"
-                  bgColor="gray.200"
+                  bgColor="blackAlpha.50"
                   color="blackAlpha.600"
                   fontSize="sm"
                 >
