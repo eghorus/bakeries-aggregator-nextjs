@@ -1,9 +1,9 @@
-import { chakra, Grid } from "@chakra-ui/react";
+import { chakra, Grid, GridProps } from "@chakra-ui/react";
 import { CartProduct } from "@/models/CartProduct";
 
 type OrderDetailsGridProps = {
   products: CartProduct[];
-};
+} & GridProps;
 
 const GridItemHeader = ({ children }: { children: React.ReactNode }) => (
   <chakra.span borderBottom="1px" borderColor="blackAlpha.200" px="1" py="1" fontSize="xs" fontWeight="bold">
@@ -23,11 +23,16 @@ const GridItem = ({ children }: { children: React.ReactNode }) => (
   </chakra.span>
 );
 
-const OrderDetailsGrid = ({ products }: OrderDetailsGridProps) => {
+const OrderDetailsGrid = ({ products, ...gridProps }: OrderDetailsGridProps) => {
   const orderTotal = products.reduce((sum, item) => (sum += item.quantity * item.price), 0);
 
   return (
-    <Grid gridTemplateColumns="auto auto minmax(2rem, auto) minmax(2rem, auto)" alignItems="end" rowGap="2">
+    <Grid
+      gridTemplateColumns="auto auto minmax(2rem, auto) minmax(2rem, auto)"
+      alignItems="end"
+      rowGap="2"
+      {...gridProps}
+    >
       <GridItemHeader>Product</GridItemHeader>
       <GridItemHeader>QTY</GridItemHeader>
       <GridItemHeader>Price</GridItemHeader>
@@ -45,7 +50,7 @@ const OrderDetailsGrid = ({ products }: OrderDetailsGridProps) => {
       <GridItemFooter>Total</GridItemFooter>
       <GridItemFooter></GridItemFooter>
       <GridItemFooter></GridItemFooter>
-      <GridItemFooter>{orderTotal}</GridItemFooter>
+      <GridItemFooter>{orderTotal.toLocaleString()}</GridItemFooter>
     </Grid>
   );
 };

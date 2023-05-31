@@ -15,13 +15,14 @@ import {
 } from "@chakra-ui/react";
 import { BiChevronDown } from "react-icons/bi";
 import { MdLogout, MdOutlineReceiptLong } from "react-icons/md";
+import { RiShoppingBasketFill } from "react-icons/ri";
 import { CurrentUserContext } from "@/store/current-user-context";
 
 const HeaderNavigationItems = () => {
   const { currentUser } = useContext(CurrentUserContext);
 
   return currentUser ? (
-    <Menu>
+    <Menu autoSelect={false}>
       <MenuButton>
         <Flex alignItems="center" gap="2">
           <chakra.span fontWeight="medium">{currentUser.name}</chakra.span>
@@ -34,6 +35,10 @@ const HeaderNavigationItems = () => {
           <MenuItem as={NextLink} href="/my-orders" _hover={{ bgColor: "blackAlpha.100" }}>
             <Icon as={MdOutlineReceiptLong} mr="2" />
             <chakra.span fontSize="sm">My Orders</chakra.span>
+          </MenuItem>
+          <MenuItem as={NextLink} href="/cart" _hover={{ bgColor: "blackAlpha.100" }}>
+            <Icon as={RiShoppingBasketFill} mr="2" />
+            <chakra.span fontSize="sm">Cart</chakra.span>
           </MenuItem>
         </MenuGroup>
         <MenuDivider />
