@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Box, chakra, Flex } from "@chakra-ui/react";
 import { Product } from "@/models/Product";
 import { getImageUrl } from "@/helpers/url";
-import AddToCartButton from "./add-to-cart-button";
+import AddToCartButton from "../add-to-cart-button";
 
 type ProductCardProps = {
   product: Product;

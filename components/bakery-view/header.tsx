@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Avatar, Box, chakra, Flex, HStack, Heading } from "@chakra-ui/react";
 import { getImageUrl } from "@/helpers/url";
-import RatingStars from "./rating-stars";
+import BakeryRatingStars from "./bakery-rating-stars";
 
 type HeaderProps = {
   categories: string[];
@@ -65,7 +65,7 @@ const Header = ({ categories, images, ratingAvg, ratingQty, title }: HeaderProps
                 </Box>
               ))}
             </HStack>
-            <RatingStars ratingAvg={ratingAvg} ratingQty={ratingQty} />
+            <BakeryRatingStars ratingAvg={ratingAvg} ratingQty={ratingQty} />
           </Flex>
         </Flex>
       </Box>

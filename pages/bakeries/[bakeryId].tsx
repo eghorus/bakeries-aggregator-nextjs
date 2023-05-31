@@ -47,7 +47,7 @@ export default function BakeryPage({ bakery }: BakeryPageProps) {
 }
 
 export const getStaticProps: GetStaticProps<BakeryPageProps> = async ({ params }) => {
-  const res = await axios.get(`${process.env.API_URL}/bakeries/${params?.bakeryId}`);
+  const res = await axios({ method: "GET", url: `${process.env.API_URL}/bakeries/${params?.bakeryId}` });
   const bakery: Bakery = res.data.data.bakery;
 
   if (!bakery) {
@@ -60,7 +60,7 @@ export const getStaticProps: GetStaticProps<BakeryPageProps> = async ({ params }
     props: {
       bakery,
     },
-    revalidate: 7 * 24 * 60 * 60, // 7d
+    revalidate: 1 * 24 * 60 * 60, // 1d
   };
 };
 
