@@ -1,28 +1,29 @@
-import { useContext } from "react";
-import { Button, HStack } from "@chakra-ui/react";
-import axios from "axios";
-import { AuthContext } from "@/store/auth-context";
+import { Button, HStack, useDisclosure } from "@chakra-ui/react";
+import CompleteOrderModal from "./complete-order-modal";
+import CancelOrderModal from "./cancel-order-modal";
 
-const OrderActions = () => {
-  const { authToken } = useContext(AuthContext);
+type OrderActionsProps = {
+  orderId: string;
+};
 
-  const completeOrder = async () => {
-    const res = await axios({
-      method: "PATCH",
-      url: `${process.env.NEXT_PUBLIC_API_URL}/orders`,
-      headers: { Authorization: `Bearer ${authToken}` },
-    });
-  };
+const OrderActions = ({ orderId }: OrderActionsProps) => {
+  const { isOpen: isCompleteModalOpen, onOpen: onCompleteModalOpen, onClose: onCompleteModalClose } = useDisclosure();
+  const { isOpen: isCancelModalOpen, onOpen: onCancelModalOpen, onClose: onCancelModalClose } = useDisclosure();
 
   return (
-    <HStack>
-      <Button size="sm" variant="ghost">
-        Mark Completed
-      </Button>
-      <Button colorScheme="blackAlpha" size="sm" variant="ghost">
-        Cancel Order
-      </Button>
-    </HStack>
+    <>
+      <HStack>
+        <Button size="sm" variant="ghost" onClick={onCompleteModalOpen}>
+          Mark Completed
+        </Button>
+        <Button colorScheme="blackAlpha" size="sm" variant="ghost" onClick={onCancelModalOpen}>
+          Cancel Order
+        </Button>
+      </HStack>
+
+      <CompleteOrderModal orderId={orderId} isOpen={isCompleteModalOpen} onClose={onCompleteModalClose} />
+      <CancelOrderModal orderId={orderId} isOpen={isCancelModalOpen} onClose={onCancelModalClose} />
+    </>
   );
 };
 

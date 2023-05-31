@@ -3,7 +3,7 @@ import { Box, Grid } from "@chakra-ui/react";
 import axios from "axios";
 import { AuthContext } from "@/store/auth-context";
 import { CurrentUserContext } from "@/store/current-user-context";
-import useModal from "@/hooks/use-modal";
+import useModal from "@/hooks/use-modal-2";
 import Header from "./header";
 import Footer from "./footer";
 

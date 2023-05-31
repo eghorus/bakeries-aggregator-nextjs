@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import Modal from "@/components/modal";
+import Modal from "@/components/modal-2";
 import { isAxiosError } from "axios";
 
 const useModal = () => {

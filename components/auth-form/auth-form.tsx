@@ -5,7 +5,7 @@ import { SubmitHandler } from "react-hook-form";
 import axios, { AxiosError } from "axios";
 import { AuthContext } from "@/store/auth-context";
 import useAuthForm, { FormData } from "./use-auth-form";
-import useModal from "@/hooks/use-modal";
+import useModal from "@/hooks/use-modal-2";
 import Input from "./input";
 
 type AuthFormProps = {

@@ -7,18 +7,15 @@ import { AuthContext } from "@/store/auth-context";
 import { OrderType } from "@/models/Order";
 import Order from "@/components/order/order";
 
-const getUserAccount = async (authToken: string) => {
-  const res = await axios({
-    method: "GET",
-    url: `${process.env.NEXT_PUBLIC_API_URL}/users/account`,
-    headers: { Authorization: `Bearer ${authToken}` },
-  });
+const getUserAccount = async ([path, authToken]: [string, string]) => {
+  const url = `${process.env.NEXT_PUBLIC_API_URL}${path}`;
+  const res = await axios({ method: "GET", url, headers: { Authorization: `Bearer ${authToken}` } });
   return res.data.data.user;
 };
 
 export default function MyOrders() {
   const { authToken } = useContext(AuthContext);
-  const { data, error, isLoading } = useSWR(authToken, getUserAccount);
+  const { data: user, error, isLoading } = useSWR(["/users/account", authToken], getUserAccount);
 
   if (error) return <div>Failed to load...</div>;
 
@@ -35,13 +32,13 @@ export default function MyOrders() {
         <Text mb="4" color="blackAlpha.700">
           Please mark active orders as completed after collecting it from the bakery shop.
         </Text>
-        <Text mb="4" color="primary.700" fontSize="sm">
+        <Text mb="4" color="secondary.700" fontSize="sm">
           Click on each order to expand order details.
         </Text>
 
-        <Skeleton isLoaded={!isLoading && data}>
+        <Skeleton isLoaded={!isLoading && user}>
           <Flex flexDirection="column-reverse">
-            {data && data.orders.map((o: OrderType) => <Order key={o.id} order={o} />)}
+            {user && user.orders.map((o: OrderType) => <Order key={o.id} order={o} />)}
           </Flex>
         </Skeleton>
       </chakra.section>
