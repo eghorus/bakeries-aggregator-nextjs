@@ -1,4 +1,4 @@
-import type { GetStaticProps, GetStaticPaths } from "next";
+import type { GetServerSideProps } from "next";
 import Head from "next/head";
 import { Box, chakra, Flex } from "@chakra-ui/react";
 import axios from "axios";
@@ -46,7 +46,7 @@ export default function BakeryPage({ bakery }: BakeryPageProps) {
   );
 }
 
-export const getStaticProps: GetStaticProps<BakeryPageProps> = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps<BakeryPageProps> = async ({ params }) => {
   const res = await axios({ method: "GET", url: `${process.env.API_URL}/bakeries/${params?.bakeryId}` });
   const bakery: Bakery = res.data.data.bakery;
 
@@ -60,17 +60,5 @@ export const getStaticProps: GetStaticProps<BakeryPageProps> = async ({ params }
     props: {
       bakery,
     },
-    revalidate: 1 * 24 * 60 * 60, // 1d
-  };
-};
-
-export const getStaticPaths: GetStaticPaths = async () => {
-  const res = await axios.get(`${process.env.API_URL}/bakeries`);
-  const bakeries: Bakery[] = res.data.data.bakeries;
-  const paths = bakeries.map((b) => ({ params: { bakeryId: b.id } }));
-
-  return {
-    paths,
-    fallback: true,
   };
 };

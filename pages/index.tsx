@@ -1,4 +1,4 @@
-import type { GetStaticProps } from "next";
+import type { GetServerSideProps } from "next";
 import Head from "next/head";
 import { Box } from "@chakra-ui/react";
 import axios from "axios";
@@ -23,7 +23,7 @@ export default function HomePage({ bakeries }: HomePageProps) {
   );
 }
 
-export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
+export const getServerSideProps: GetServerSideProps<HomePageProps> = async () => {
   const res = await axios({ method: "GET", url: `${process.env.API_URL}/bakeries` });
   const bakeries: Bakery[] = res.data.data.bakeries;
 
@@ -31,6 +31,5 @@ export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
     props: {
       bakeries,
     },
-    revalidate: 1 * 24 * 60 * 60, // 1d
   };
 };

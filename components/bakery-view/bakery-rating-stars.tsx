@@ -14,7 +14,7 @@ const BakeryRatingStars = ({ ratingAvg, ratingQty }: BakeryRatingStarsProps) => 
   const emptyStarsCount = totalStarsCount - filledStarsCount - halfFilledStarCount;
 
   return (
-    <Flex alignItems="flex-end" flexWrap="wrap" columnGap="2" rowGap="4" fontSize="sm" lineHeight="1">
+    <Flex alignItems="flex-end" flexWrap="wrap" gap="2" fontSize="sm" lineHeight="1">
       <chakra.span
         minW="6"
         borderRadius="xl"
@@ -27,7 +27,7 @@ const BakeryRatingStars = ({ ratingAvg, ratingQty }: BakeryRatingStarsProps) => 
       >
         {roundedRatingAvg}
       </chakra.span>
-      <HStack spacing="1">
+      <HStack spacing="0">
         {Array(filledStarsCount)
           .fill(1)
           .map((_, i) => (

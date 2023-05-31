@@ -14,7 +14,7 @@ export default function SignOutPage() {
   }, [removeAuthToken, setCurrentUser]);
 
   return (
-    <chakra.p mt="16" fontSize="lg" fontWeight="semibold" textAlign="center">
+    <chakra.p mt="16" fontSize="lg" fontWeight="bold" textAlign="center">
       See You Soon! 👋
     </chakra.p>
   );
