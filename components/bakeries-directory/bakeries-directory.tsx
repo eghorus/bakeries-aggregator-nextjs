@@ -1,9 +1,20 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Box, Flex, Grid, Heading, Text, chakra, useCheckboxGroup } from "@chakra-ui/react";
+import { Product } from "@/models/Product";
 import { Bakery } from "@/models/Bakery";
 import { hasAnyItemInCommon } from "@/helpers/array";
 import CategoryCheckbox from "./category-checkbox";
 import BakeryCard from "./bakery-card";
+
+type AdjustedBakeries = {
+  categories: string[];
+  id: string;
+  title: string;
+  images: { logo: string; cover: string };
+  ratingAvg: number;
+  ratingQty: number;
+  products: Product[];
+}[];
 
 type BakeriesDirectoryProps = {
   bakeries: Bakery[];
@@ -11,24 +22,24 @@ type BakeriesDirectoryProps = {
 
 const BakeriesDirectory = ({ bakeries }: BakeriesDirectoryProps) => {
   const { value: filteredCategories, getCheckboxProps } = useCheckboxGroup({ defaultValue: [] });
+  const [adjustedBakeries, setAdjustedBakeries] = useState([] as AdjustedBakeries);
 
   // Better to fix on the server to get all categories list and each bakery model should have a field with their categories
 
-  /* To add a categories property to each bakery. */
-  const adjustedBakeries = useMemo(
-    () =>
-      bakeries.map((b) => {
-        const categories: { [key: string]: string } = {};
-        b.products.map((p) => {
-          if (!categories[p.category]) {
-            categories[p.category] = p.category;
-          }
-          return p;
-        });
-        return { ...b, categories: Object.values(categories) };
-      }),
-    [bakeries]
-  );
+  useEffect(() => {
+    /* To add a categories property to each bakery. */
+    const adjustedBakeries = bakeries.map((b) => {
+      const categories: { [key: string]: string } = {};
+      b.products.map((p) => {
+        if (!categories[p.category]) {
+          categories[p.category] = p.category;
+        }
+        return p;
+      });
+      return { ...b, categories: Object.values(categories) };
+    });
+    setAdjustedBakeries(adjustedBakeries);
+  }, [bakeries]);
 
   const categoryList = useMemo(() => {
     const categories: string[] = [];
