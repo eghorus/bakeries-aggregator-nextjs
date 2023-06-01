@@ -44,7 +44,8 @@ export const getServerSideProps: GetServerSideProps<HomePageProps> = async () =>
 
   const categories: string[] = [];
   adjustedBakeries.forEach((b) => categories.push(...b.categories));
-  const categoryList = Array.from(new Set(categories));
+  // const categoryList = Array.from(new Set(categories));
+  const categoryList = categories;
 
   return {
     props: {
