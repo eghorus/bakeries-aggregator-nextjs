@@ -3,14 +3,27 @@ import Head from "next/head";
 import { chakra } from "@chakra-ui/react";
 import axios from "axios";
 import { Bakery } from "@/models/Bakery";
+import { Product } from "@/models/Product";
 import BakeriesDirectory from "@/components/bakeries-directory/bakeries-directory";
 
 type HomePageProps = {
-  bakeries: (Bakery & { categories: string[] })[];
+  bakeries: Bakery[];
+  adjustedBakeries: {
+    id: string;
+    title: string;
+    images: {
+      logo: string;
+      cover: string;
+    };
+    ratingAvg: number;
+    ratingQty: number;
+    products: Product[];
+    categories: string[];
+  }[];
   categories: string[];
 };
 
-export default function HomePage({ bakeries, categories }: HomePageProps) {
+export default function HomePage({ bakeries, adjustedBakeries, categories }: HomePageProps) {
   return (
     <>
       <Head>
@@ -18,7 +31,7 @@ export default function HomePage({ bakeries, categories }: HomePageProps) {
       </Head>
 
       <chakra.section maxW="container.lg" mx="auto" my="4">
-        <BakeriesDirectory bakeries={bakeries} categories={categories} />
+        <BakeriesDirectory bakeries={bakeries} adjustedBakeries={adjustedBakeries} categories={categories} />
       </chakra.section>
     </>
   );
@@ -47,7 +60,8 @@ export const getServerSideProps: GetServerSideProps<HomePageProps> = async () =>
 
   return {
     props: {
-      bakeries: adjustedBakeries,
+      bakeries,
+      adjustedBakeries,
       categories,
     },
   };

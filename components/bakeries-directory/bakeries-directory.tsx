@@ -1,36 +1,73 @@
 import { Box, Flex, Grid, Heading, Text, chakra, useCheckboxGroup } from "@chakra-ui/react";
 import { Bakery } from "@/models/Bakery";
+import { Product } from "@/models/Product";
 import { hasAnyItemInCommon } from "@/helpers/array";
 import CategoryCheckbox from "./category-checkbox";
 import BakeryCard from "./bakery-card";
 
 type BakeriesDirectoryProps = {
-  bakeries: (Bakery & { categories: string[] })[];
+  bakeries: Bakery[];
+  adjustedBakeries: {
+    id: string;
+    title: string;
+    images: {
+      logo: string;
+      cover: string;
+    };
+    ratingAvg: number;
+    ratingQty: number;
+    products: Product[];
+    categories: string[];
+  }[];
   categories: string[];
 };
 
-const BakeriesDirectory = ({ bakeries, categories }: BakeriesDirectoryProps) => {
+const BakeriesDirectory = ({ bakeries, adjustedBakeries, categories }: BakeriesDirectoryProps) => {
   const { value: filteredCategories, getCheckboxProps } = useCheckboxGroup({ defaultValue: [] });
+  //
 
-  console.log(categories);
-  console.log(bakeries);
+  let adjbake: {
+    id: string;
+    title: string;
+    images: {
+      logo: string;
+      cover: string;
+    };
+    ratingAvg: number;
+    ratingQty: number;
+    products: Product[];
+    categories?: string[];
+  }[] = [...bakeries];
+  for (let i = 0; i < adjbake.length; i++) {
+    console.log(adjbake[i]);
 
-  const categoriesHash: { [key: string]: string } = {};
-  bakeries.forEach((b) => {
-    console.log(b);
-    b.categories.forEach((c) => {
-      console.log(c);
-      categoriesHash[c] = c;
+    const categories: Record<any, string> = {};
+
+    for (let j = 0; j < adjbake[i].products.length; j++) {
+      console.log(adjbake[i].products);
+
+      if (!categories[adjbake[i].products[j].category]) {
+        categories[adjbake[i].products[j].category] = adjbake[i].products[j].category;
+      }
+
+      adjbake[i].categories = Object.values(categories);
+    }
+  }
+  const adjBakeries = bakeries.map((b) => {
+    const categories: Record<any, string> = {};
+    b.products.map((p) => {
+      if (!categories[p.category]) {
+        categories[p.category] = p.category;
+      }
+      return p;
     });
+    return { ...b, categories: Object.values(categories) };
   });
-  const cat = Object.values(categoriesHash);
-  console.log(cat);
-  console.log(categoriesHash);
-
+  //
   const filteredBakeries =
     filteredCategories.length > 0
-      ? bakeries.filter((b) => hasAnyItemInCommon(b.categories, filteredCategories))
-      : bakeries;
+      ? adjustedBakeries.filter((b) => hasAnyItemInCommon(b.categories, filteredCategories))
+      : adjustedBakeries;
 
   return (
     <>
