@@ -31,7 +31,7 @@ export const getServerSideProps: GetServerSideProps<HomePageProps> = async () =>
   // Better to fix on the server to get all categories list and each bakery model should have a field with their categories
 
   const adjustedBakeries = bakeries.map((b) => {
-    const categories: { [key: string]: string } = {};
+    const categories: Record<any, string> = {};
     b.products.map((p) => {
       if (!categories[p.category]) {
         categories[p.category] = p.category;
@@ -41,7 +41,7 @@ export const getServerSideProps: GetServerSideProps<HomePageProps> = async () =>
     return { ...b, categories: Object.values(categories) };
   });
 
-  const categoriesHash: { [key: string]: string } = {};
+  const categoriesHash: Record<any, string> = {};
   adjustedBakeries.forEach((b) => b.categories.forEach((c) => (categoriesHash[c] = c)));
   const categories = Object.values(categoriesHash);
 
