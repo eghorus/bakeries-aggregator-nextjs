@@ -42,7 +42,7 @@ const BakeriesDirectory = ({ bakeries }: BakeriesDirectoryProps) => {
       : adjustedBakeries;
 
   return (
-    <chakra.section maxW="container.lg" mx="auto" my="6">
+    <>
       <Box
         border="1px"
         borderColor="blackAlpha.400"
@@ -73,12 +73,12 @@ const BakeriesDirectory = ({ bakeries }: BakeriesDirectoryProps) => {
         </Box>
       </Box>
 
-      <Grid gridTemplateColumns="repeat(auto-fit, 18rem)" justifyContent="center" gap="8" px="4" py="8">
+      <Grid gridTemplateColumns="repeat(auto-fit, 18rem)" justifyContent="center" gap="8" px="4" py="6">
         {filteredBakeries.map((b) => (
           <BakeryCard key={b.id} bakery={b} />
         ))}
       </Grid>
-    </chakra.section>
+    </>
   );
 };
 

@@ -1,18 +1,18 @@
 import type { GetServerSideProps } from "next";
 import Head from "next/head";
-import { Box, chakra, Flex } from "@chakra-ui/react";
+import { Box, Heading, chakra } from "@chakra-ui/react";
 import axios from "axios";
 import { Bakery } from "@/models/Bakery";
 import { CategorizedProducts } from "@/models/CategorizedProducts";
-import Header from "@/components/bakery-view/header";
-import BakeryMenu from "@/components/bakery-view/bakery-menu";
+import Header from "@/components/bakery-menu/header";
+import ProductsCategory from "@/components/bakery-menu/products-category";
 
 type BakeryPageProps = {
   bakery: Bakery;
 };
 
 export default function BakeryPage({ bakery }: BakeryPageProps) {
-  const { id, images, products, ratingAvg, ratingQty, title } = bakery;
+  const { images, products, ratingAvg, ratingQty, title } = bakery;
   const categorizedProducts: CategorizedProducts = {};
   products.forEach((p) => {
     if (!categorizedProducts[p.category]) categorizedProducts[p.category] = [];
@@ -25,23 +25,24 @@ export default function BakeryPage({ bakery }: BakeryPageProps) {
         <title>{`${title} | Bakeries Aggregator`}</title>
       </Head>
 
-      <Flex gap="6">
-        <Box w="full" maxW="64" bgColor="gray.200">
-          Side
+      <chakra.section maxW="container.md" mx="auto" my="4">
+        <Header
+          title={title}
+          images={images}
+          categories={Object.keys(categorizedProducts)}
+          ratingAvg={ratingAvg}
+          ratingQty={ratingQty}
+        />
+
+        <Box overflow="hidden" border="1px" borderColor="blackAlpha.200" borderRadius="lg">
+          <Heading as="h3" size="h3" p="4" bgColor="white" color="primary.600">
+            Menu
+          </Heading>
+          {Object.keys(categorizedProducts).map((key, i) => (
+            <ProductsCategory key={i} title={key} products={categorizedProducts[key]} bakery={bakery} />
+          ))}
         </Box>
-
-        <chakra.section w="full">
-          <Header
-            categories={Object.keys(categorizedProducts)}
-            images={images}
-            ratingAvg={ratingAvg}
-            ratingQty={ratingQty}
-            title={title}
-          />
-
-          <BakeryMenu bakery={bakery} categorizedProducts={categorizedProducts} />
-        </chakra.section>
-      </Flex>
+      </chakra.section>
     </>
   );
 }

@@ -3,7 +3,7 @@ import { Box, chakra, Flex } from "@chakra-ui/react";
 import { Product } from "@/models/Product";
 import { Bakery } from "@/models/Bakery";
 import { getImageUrl } from "@/helpers/url";
-import AddToCartButton from "../add-to-cart-button";
+import AddToCartButton from "./add-to-cart-button";
 
 type ProductCardProps = {
   product: Product;
@@ -21,7 +21,7 @@ const ProductCard = ({ product, bakery }: ProductCardProps) => {
       w="170px"
       overflow="hidden"
       border="2px"
-      borderColor="blackAlpha.200"
+      borderColor="blackAlpha.300"
       borderRadius="lg"
       bgColor="white"
       transitionDuration="normal"

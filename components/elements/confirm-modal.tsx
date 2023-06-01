@@ -32,7 +32,7 @@ const ConfirmModal = ({ heading, message, confirmButtonTitle, onConfirm, onClose
 
           <AlertDialogFooter>
             <Button colorScheme="secondary" ref={cancelRef} onClick={onClose}>
-              Cancel
+              {confirmButtonTitle ? "Cancel" : "Ok"}
             </Button>
             {confirmButtonTitle && (
               <Button onClick={onConfirm} ml={4}>

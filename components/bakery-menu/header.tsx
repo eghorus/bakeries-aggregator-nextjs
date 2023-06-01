@@ -1,17 +1,17 @@
 import Image from "next/image";
 import { Avatar, Box, chakra, Flex, HStack, Heading } from "@chakra-ui/react";
 import { getImageUrl } from "@/helpers/url";
-import BakeryRatingStars from "./bakery-rating-stars";
+import RatingStars from "../elements/rating-stars";
 
 type HeaderProps = {
-  categories: string[];
+  title: string;
   images: {
     logo: string;
     cover: string;
   };
+  categories: string[];
   ratingAvg: number;
   ratingQty: number;
-  title: string;
 };
 
 const Header = ({ categories, images, ratingAvg, ratingQty, title }: HeaderProps) => {
@@ -27,8 +27,8 @@ const Header = ({ categories, images, ratingAvg, ratingQty, title }: HeaderProps
       <Box px="6" py="4">
         <Flex gap="6" alignItems="flex-start">
           <Avatar
-            name={title}
             src={logoImgSrc}
+            name={title}
             size="xl"
             position="relative"
             transform="translateY(-2rem)"
@@ -65,7 +65,7 @@ const Header = ({ categories, images, ratingAvg, ratingQty, title }: HeaderProps
                 </Box>
               ))}
             </HStack>
-            <BakeryRatingStars ratingAvg={ratingAvg} ratingQty={ratingQty} />
+            <RatingStars ratingVal={ratingAvg} ratingQty={ratingQty} />
           </Flex>
         </Flex>
       </Box>

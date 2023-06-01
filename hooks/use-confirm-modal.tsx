@@ -1,5 +1,5 @@
 import { MouseEventHandler, useState } from "react";
-import ConfirmModal from "@/components/confirm-modal";
+import ConfirmModal from "@/components/elements/confirm-modal";
 
 const useConfirmModal = (onConfirm: MouseEventHandler<HTMLButtonElement>) => {
   type ModalState = { heading: string; message: string; confirmButtonTitle?: string };

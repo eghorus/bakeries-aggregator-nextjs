@@ -14,9 +14,9 @@ type AddToCartButtonProps = {
 };
 
 const AddToCartButton = ({ product, bakery }: AddToCartButtonProps) => {
-  const router = useRouter();
   const { authUserId } = useContext(AuthContext);
   const { bakery: bakeryInCart, addToCart } = useContext(CartContext);
+  const router = useRouter();
   const { valueAsNumber, getInputProps, getIncrementButtonProps, getDecrementButtonProps } = useNumberInput({
     step: 1,
     defaultValue: 1,
@@ -28,20 +28,21 @@ const AddToCartButton = ({ product, bakery }: AddToCartButtonProps) => {
     router.push("/auth?form=signin")
   );
 
-  const handleAddToCart = () => {
+  const onAddToCart = () => {
     if (!authUserId) {
       openConfirmModal({
-        heading: "Plesae sign in!",
+        heading: "Plesae sign in",
         message: "You need to sign in or create a new account to starting adding products.",
-        confirmButtonTitle: "Sign In Page",
+        confirmButtonTitle: "Sign In",
       });
       return;
     }
 
     if (bakeryInCart && bakeryInCart.id !== product.bakery) {
       openConfirmModal({
-        heading: "This is a different Order!",
-        message: "You need to empty your cart first to start creating an order from another bakery shop.",
+        heading: "This will be a different order",
+        message:
+          "You need to empty your cart or confirm your order first to start creating an order from another bakery shop.",
       });
       return;
     }
@@ -61,7 +62,7 @@ const AddToCartButton = ({ product, bakery }: AddToCartButtonProps) => {
             -
           </Button>
         </Flex>
-        <Button size="sm" onClick={handleAddToCart}>
+        <Button size="sm" onClick={onAddToCart}>
           Add
         </Button>
       </Flex>
