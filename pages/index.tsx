@@ -42,7 +42,7 @@ export const getServerSideProps: GetServerSideProps<HomePageProps> = async () =>
   });
 
   const allCategoriesFound: string[] = [];
-  adjustedBakeries.forEach((b) => categories.push(...b.categories));
+  adjustedBakeries.forEach((b) => allCategoriesFound.push(...b.categories));
   const categories = Array.from(new Set(allCategoriesFound));
 
   return {
