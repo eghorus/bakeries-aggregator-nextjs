@@ -10,8 +10,14 @@ type BakeriesDirectoryProps = {
   categoryList: string[];
 };
 
-const BakeriesDirectory = ({ bakeries, adjustedBakeries, categoryList }: BakeriesDirectoryProps) => {
+const BakeriesDirectory = ({
+  bakeries,
+  adjustedBakeries,
+  categoryList = ["Cakes", "Bread", "Brownies & Bars", "Cookies", "Frosting", "Pies"],
+}: BakeriesDirectoryProps) => {
   const { value: filteredCategories, getCheckboxProps } = useCheckboxGroup({ defaultValue: [] });
+
+  ["Cakes", "Bread", "Brownies & Bars", "Cookies", "Frosting", "Pies"];
 
   const filteredBakeries =
     filteredCategories.length > 0
