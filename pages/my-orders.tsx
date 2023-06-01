@@ -1,8 +1,9 @@
 import { useContext } from "react";
 import Head from "next/head";
-import { chakra, Flex, Heading, Skeleton, Text } from "@chakra-ui/react";
+import { Center, chakra, Flex, Heading, Skeleton, Spinner, Text } from "@chakra-ui/react";
 import useSWR from "swr";
 import axios from "axios";
+import usePageProtect from "@/hooks/use-page-protect";
 import { AuthContext } from "@/store/auth-context";
 import { OrderType } from "@/models/Order";
 import Order from "@/components/order/order";
@@ -14,10 +15,18 @@ const getUserAccount = async ([path, authToken]: [string, string]) => {
 };
 
 export default function MyOrders() {
+  const { isCheckingAuth, LoadingSpinner } = usePageProtect({ allowed: "authenticated" });
   const { authToken } = useContext(AuthContext);
   const { data: user, error, isLoading } = useSWR(["/users/account", authToken], getUserAccount);
 
-  if (error) return <div>Failed to load...</div>;
+  if (isCheckingAuth) return <LoadingSpinner />;
+
+  if (error)
+    return (
+      <Text mt="12" textAlign="center">
+        Failed to load...
+      </Text>
+    );
 
   return (
     <>

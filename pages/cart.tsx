@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { Button, chakra, Flex, Heading, Text } from "@chakra-ui/react";
 import useSWRMutation from "swr/mutation";
 import axios from "axios";
+import usePageProtect from "@/hooks/use-page-protect";
 import { CartProduct } from "@/models/CartProduct";
 import { AuthContext } from "@/store/auth-context";
 import { CartContext } from "@/store/cart-context";
@@ -23,10 +24,13 @@ const confirmOrderFetcher = async (
 };
 
 export default function CartPage() {
+  const { isCheckingAuth, LoadingSpinner } = usePageProtect({ allowed: "authenticated" });
   const { authToken } = useContext(AuthContext);
   const { bakeryId, products, removeFromCart, emptyCart } = useContext(CartContext);
   const { trigger, isMutating } = useSWRMutation([`/orders`, authToken], confirmOrderFetcher);
   const router = useRouter();
+
+  if (isCheckingAuth) return <LoadingSpinner />;
 
   const onConfirmOrder = async () => {
     const confirmOrderdata = {

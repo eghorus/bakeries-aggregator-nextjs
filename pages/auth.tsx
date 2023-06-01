@@ -4,6 +4,7 @@ import { NextRouter, useRouter } from "next/router";
 import { ParsedUrlQuery } from "querystring";
 import { Flex, Heading, Icon, Link, Text } from "@chakra-ui/react";
 import { FaUserPlus, FaUserShield } from "react-icons/fa";
+import usePageProtect from "@/hooks/use-page-protect";
 import AuthForm from "@/components/auth-form/auth-form";
 
 interface AuthPageQuery extends ParsedUrlQuery {
@@ -11,8 +12,11 @@ interface AuthPageQuery extends ParsedUrlQuery {
 }
 
 export default function AuthPage() {
+  const { isCheckingAuth, LoadingSpinner } = usePageProtect({ allowed: "unAuthenticated" });
   const { query }: NextRouter & { query: AuthPageQuery } = useRouter();
   const { form: formType = "signin" } = query;
+
+  if (isCheckingAuth) return <LoadingSpinner />;
 
   return (
     <>
