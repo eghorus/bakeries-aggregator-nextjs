@@ -19,10 +19,10 @@ An online aggregator to search and order products from bakery shops.
 ## 💎 Technologies
 
 1. Nexjs
-2. Chakra UI
-3. TypeScript
+2. TypeScript
+3. Chakra UI
 4. SWR
-5. React-Hook-Form
+5. React Hook Form
 
 ## ⚙️ Installation
 
