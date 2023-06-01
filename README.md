@@ -4,21 +4,22 @@ An online aggregator to search and order products from bakery shops.
 
 ## 📝 Description
 
-✴️ **User Accounts Can Do The Following:**
+### Guests Can Do The Following:
 
+- View all bakeries, their details, and their product menus.
 - Create a new user account.
-- Sign in (Default credentials are setted for easier login).
-- View and filter all bakeries.
-- View each bakery's menu and add products to their cart.
-- View and edit cart items.
-- Place orders.
-- Mark orders as completed and give it a rating.
-- Cancel active orders.
+
+### Members Can Do The Following:
+
+- Sign in to their accounts (Default credentials are added for easier testing).
+- Select baking products from a bakery menu and place an order.
+- Mark their orders as completed and give them a rating that will reflect on bakery rating.
+- Cancel their active orders.
 
 ## 💎 Technologies
 
 1. Nexjs
-2. Chakra Ui
+2. Chakra UI
 3. TypeScript
 4. SWR
 5. React-Hook-Form
