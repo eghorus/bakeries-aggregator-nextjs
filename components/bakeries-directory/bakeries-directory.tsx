@@ -6,11 +6,26 @@ import BakeryCard from "./bakery-card";
 
 type BakeriesDirectoryProps = {
   bakeries: (Bakery & { categories: string[] })[];
-  categoryList: string[];
+  categories: string[];
 };
 
-const BakeriesDirectory = ({ bakeries, categoryList }: BakeriesDirectoryProps) => {
+const BakeriesDirectory = ({ bakeries, categories }: BakeriesDirectoryProps) => {
   const { value: filteredCategories, getCheckboxProps } = useCheckboxGroup({ defaultValue: [] });
+
+  console.log(categories);
+  console.log(bakeries);
+
+  const categoriesHash: { [key: string]: string } = {};
+  bakeries.forEach((b) => {
+    console.log(b);
+    b.categories.forEach((c) => {
+      console.log(c);
+      categoriesHash[c] = c;
+    });
+  });
+  const cat = Object.values(categoriesHash);
+  console.log(cat);
+  console.log(categoriesHash);
 
   const filteredBakeries =
     filteredCategories.length > 0
@@ -42,7 +57,7 @@ const BakeriesDirectory = ({ bakeries, categoryList }: BakeriesDirectoryProps) =
             Filter by category
           </Text>
           <Flex flexWrap="wrap" justifyContent="center" gap="2">
-            {categoryList.map((c, i) => (
+            {categories.map((c, i) => (
               <CategoryCheckbox key={i} label={c} {...getCheckboxProps({ value: c })} />
             ))}
           </Flex>

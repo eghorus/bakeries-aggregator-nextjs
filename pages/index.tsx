@@ -7,10 +7,10 @@ import BakeriesDirectory from "@/components/bakeries-directory/bakeries-director
 
 type HomePageProps = {
   bakeries: (Bakery & { categories: string[] })[];
-  categoryList: string[];
+  categories: string[];
 };
 
-export default function HomePage({ bakeries, categoryList }: HomePageProps) {
+export default function HomePage({ bakeries, categories }: HomePageProps) {
   return (
     <>
       <Head>
@@ -18,7 +18,7 @@ export default function HomePage({ bakeries, categoryList }: HomePageProps) {
       </Head>
 
       <chakra.section maxW="container.lg" mx="auto" my="4">
-        <BakeriesDirectory bakeries={bakeries} categoryList={categoryList} />
+        <BakeriesDirectory bakeries={bakeries} categories={categories} />
       </chakra.section>
     </>
   );
@@ -41,14 +41,14 @@ export const getServerSideProps: GetServerSideProps<HomePageProps> = async () =>
     return { ...b, categories: Object.values(categories) };
   });
 
-  const categories: { [key: string]: string } = {};
-  adjustedBakeries.forEach((b) => b.categories.forEach((c) => (categories[c] = c)));
-  const categoryList = Object.keys(categories);
+  const categoriesHash: { [key: string]: string } = {};
+  adjustedBakeries.forEach((b) => b.categories.forEach((c) => (categoriesHash[c] = c)));
+  const categories = Object.values(categoriesHash);
 
   return {
     props: {
       bakeries: adjustedBakeries,
-      categoryList,
+      categories,
     },
   };
 };
