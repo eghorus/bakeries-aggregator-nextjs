@@ -9,7 +9,6 @@ type BakeryMenuProps = {
 };
 
 const BakeryMenu = ({ bakery, categorizedProducts }: BakeryMenuProps) => {
-  console.log(categorizedProducts);
   return (
     <Box overflow="hidden" border="1px" borderColor="blackAlpha.200" borderRadius="lg">
       <Heading as="h3" size="h3" p="4" bgColor="white" color="primary.600">

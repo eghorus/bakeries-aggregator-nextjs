@@ -14,7 +14,7 @@ const RatingStars = ({ ratingVal, ratingQty }: RatingStarsProps) => {
   const emptyStarsCount = totalStarsCount - filledStarsCount - halfFilledStarCount;
 
   return (
-    <Flex alignItems="flex-end" flexWrap="wrap" gap="2" fontSize="xs" lineHeight="1">
+    <Flex flexWrap="wrap" alignItems="flex-end" columnGap="2" rowGap="2.5" fontSize="xs" lineHeight="1">
       <chakra.span
         minW="6"
         borderRadius="xl"

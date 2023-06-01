@@ -1,6 +1,5 @@
 import type { GetServerSideProps } from "next";
 import Head from "next/head";
-import { Box } from "@chakra-ui/react";
 import axios from "axios";
 import { Bakery } from "@/models/Bakery";
 import BakeriesDirectory from "@/components/bakeries-directory/bakeries-directory";

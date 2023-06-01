@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { Box, Flex, Grid, Heading, Text, chakra, useCheckboxGroup } from "@chakra-ui/react";
 import { Bakery } from "@/models/Bakery";
+import { hasAnyItemInCommon } from "@/helpers/array";
 import CategoryCheckbox from "./category-checkbox";
 import BakeryCard from "./bakery-card";
 
@@ -9,9 +10,9 @@ type BakeriesDirectoryProps = {
 };
 
 const BakeriesDirectory = ({ bakeries }: BakeriesDirectoryProps) => {
-  const { getCheckboxProps, value: filteredCategories } = useCheckboxGroup({ defaultValue: [] });
+  const { value: filteredCategories, getCheckboxProps } = useCheckboxGroup({ defaultValue: [] });
 
-  // TODO: better to fix on the server to get all categories list and each bakery model should have a field with their categories
+  // Better to fix on the server to get all categories list and each bakery model should have a field with their categories
 
   /* To add a categories property to each bakery. */
   const adjustedBakeries = useMemo(
@@ -35,9 +36,6 @@ const BakeriesDirectory = ({ bakeries }: BakeriesDirectoryProps) => {
     return Array.from(new Set(categories));
   }, [adjustedBakeries]);
 
-  const hasAnyItemInCommon = (arr1: (string | number)[], arr2: (string | number)[]) => {
-    return arr1.some((item) => arr2.indexOf(item) !== -1);
-  };
   const filteredBakeries =
     filteredCategories.length > 0
       ? adjustedBakeries.filter((b) => hasAnyItemInCommon(b.categories, filteredCategories))
@@ -67,7 +65,7 @@ const BakeriesDirectory = ({ bakeries }: BakeriesDirectoryProps) => {
           <Text mb="4" color="blackAlpha.700" fontSize="sm" textAlign="center">
             Filter by category
           </Text>
-          <Flex justifyContent="center" gap="2" flexWrap="wrap">
+          <Flex flexWrap="wrap" justifyContent="center" gap="2">
             {categoryList.map((c, i) => (
               <CategoryCheckbox key={i} label={c} {...getCheckboxProps({ value: c })} />
             ))}
@@ -76,7 +74,7 @@ const BakeriesDirectory = ({ bakeries }: BakeriesDirectoryProps) => {
       </Box>
 
       <Grid gridTemplateColumns="repeat(auto-fit, 18rem)" justifyContent="center" gap="8" px="4" py="8">
-        {filteredBakeries.map((b, i) => (
+        {filteredBakeries.map((b) => (
           <BakeryCard key={b.id} bakery={b} />
         ))}
       </Grid>

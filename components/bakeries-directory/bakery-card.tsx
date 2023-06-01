@@ -3,7 +3,7 @@ import NextLink from "next/link";
 import { Avatar, Box, Button, chakra, Flex } from "@chakra-ui/react";
 import { Bakery } from "@/models/Bakery";
 import { getImageUrl } from "@/helpers/url";
-import BakeryRatingStars from "../bakery-view/bakery-rating-stars";
+import RatingStars from "../elements/rating-stars";
 
 type BakeryCardProps = {
   bakery: Bakery & { categories: string[] };
@@ -16,8 +16,8 @@ const BakeryCard = ({ bakery }: BakeryCardProps) => {
 
   return (
     <Flex
-      flexDirection="column"
       role="group"
+      flexDirection="column"
       overflow="hidden"
       boxShadow="sm"
       border="1px"
@@ -39,7 +39,7 @@ const BakeryCard = ({ bakery }: BakeryCardProps) => {
           <chakra.span fontWeight="bold" transitionDuration="slow" _groupHover={{ color: "primary.500" }}>
             {title}
           </chakra.span>
-          <BakeryRatingStars ratingAvg={ratingAvg} ratingQty={ratingQty} />
+          <RatingStars ratingVal={ratingAvg} ratingQty={ratingQty} />
         </Flex>
       </Flex>
 

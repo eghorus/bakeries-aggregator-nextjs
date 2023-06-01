@@ -1,6 +1,6 @@
 import { Box, chakra, Collapse, Flex, useDisclosure } from "@chakra-ui/react";
 import { OrderType } from "@/models/Order";
-import RatingStars from "../rating-stars";
+import RatingStars from "../elements/rating-stars";
 import OrderActions from "./order-actions";
 import OrderDetailsGrid from "./order-details-grid";
 
