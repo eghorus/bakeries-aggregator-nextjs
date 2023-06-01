@@ -2,7 +2,7 @@ import { Box, chakra, Collapse, Flex, useDisclosure } from "@chakra-ui/react";
 import { OrderType } from "@/models/Order";
 import RatingStars from "../elements/rating-stars";
 import OrderActions from "./order-actions";
-import OrderDetailsGrid from "./order-details-grid";
+import OrderDetailsGrid from "../elements/order-details-grid";
 
 type OrderProps = {
   order: OrderType;

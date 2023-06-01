@@ -2,7 +2,7 @@ import { Box, Icon, IconButton, chakra, useDisclosure } from "@chakra-ui/react";
 import { RiMenuFoldLine } from "react-icons/ri";
 import Logo from "./logo";
 import HeaderNavigationItems from "./header-navigation-items";
-import Cart from "../cart/cart";
+import Cart from "../cart-2/cart";
 import SideDrawer from "./side-drawer/side-drawer";
 
 const Header = () => {

@@ -3,11 +3,12 @@ import { CartProduct } from "@/models/CartProduct";
 
 type OrderDetailsGridProps = GridProps & {
   products: CartProduct[];
+  ActionComponent?: React.FC<{ productId: string }>;
 };
 
 const GridItemHeader = ({ children }: { children: React.ReactNode }) => (
   <chakra.span borderBottom="1px" borderColor="blackAlpha.200" px="1" py="1" fontSize="xs" fontWeight="bold">
-    {children}
+    {children ? children : <chakra.span visibility="hidden">ph</chakra.span>}
   </chakra.span>
 );
 
@@ -23,12 +24,15 @@ const GridItem = ({ children }: { children: React.ReactNode }) => (
   </chakra.span>
 );
 
-const OrderDetailsGrid = ({ products, ...gridProps }: OrderDetailsGridProps) => {
+const OrderDetailsGrid = ({ products, ActionComponent, ...gridProps }: OrderDetailsGridProps) => {
   const orderTotal = products.reduce((sum, item) => (sum += item.quantity * item.price), 0);
 
   return (
     <Grid
       gridTemplateColumns="auto auto minmax(2rem, auto) minmax(2rem, auto)"
+      {...(ActionComponent && {
+        gridTemplateColumns: "auto auto minmax(2rem, auto) minmax(2rem, auto) 2rem",
+      })}
       alignItems="end"
       rowGap="2"
       {...gridProps}
@@ -37,6 +41,7 @@ const OrderDetailsGrid = ({ products, ...gridProps }: OrderDetailsGridProps) => 
       <GridItemHeader>QTY</GridItemHeader>
       <GridItemHeader>Price</GridItemHeader>
       <GridItemHeader>Total</GridItemHeader>
+      {ActionComponent && <GridItemHeader> </GridItemHeader>}
 
       {products.map((p) => (
         <>
@@ -44,6 +49,11 @@ const OrderDetailsGrid = ({ products, ...gridProps }: OrderDetailsGridProps) => 
           <GridItem>{p.quantity}</GridItem>
           <GridItem>{p.price}</GridItem>
           <GridItem>{(+p.quantity * +p.price).toLocaleString()}</GridItem>
+          {ActionComponent && (
+            <GridItem>
+              <ActionComponent productId={p.id} />
+            </GridItem>
+          )}
         </>
       ))}
 
@@ -51,6 +61,7 @@ const OrderDetailsGrid = ({ products, ...gridProps }: OrderDetailsGridProps) => 
       <GridItemFooter></GridItemFooter>
       <GridItemFooter></GridItemFooter>
       <GridItemFooter>{orderTotal.toLocaleString()}</GridItemFooter>
+      {ActionComponent && <GridItemFooter></GridItemFooter>}
     </Grid>
   );
 };
