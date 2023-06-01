@@ -26,7 +26,7 @@ const confirmOrderFetcher = async (
 export default function CartPage() {
   const { isCheckingAuth, LoadingSpinner } = usePageProtect({ allowed: "authenticated" });
   const { authToken } = useContext(AuthContext);
-  const { bakeryId, products, removeFromCart, emptyCart } = useContext(CartContext);
+  const { bakery, products, removeFromCart, resetCart } = useContext(CartContext);
   const { trigger, isMutating } = useSWRMutation([`/orders`, authToken], confirmOrderFetcher);
   const router = useRouter();
 
@@ -34,12 +34,12 @@ export default function CartPage() {
 
   const onConfirmOrder = async () => {
     const confirmOrderdata = {
-      bakeryId,
+      bakeryId: bakery ? bakery.id : "",
       products: Object.values(products),
     };
     await trigger(confirmOrderdata);
     router.push("/my-orders");
-    emptyCart();
+    resetCart();
   };
 
   return (
@@ -73,7 +73,7 @@ export default function CartPage() {
               <Button isLoading={isMutating} onClick={onConfirmOrder}>
                 Confirm Order
               </Button>
-              <Button colorScheme="blackAlpha" size="sm" variant="ghost" onClick={emptyCart}>
+              <Button colorScheme="blackAlpha" size="sm" variant="ghost" onClick={resetCart}>
                 Reset Cart
               </Button>
             </Flex>

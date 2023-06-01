@@ -1,29 +1,30 @@
 import { createContext, useReducer } from "react";
 import { CartProduct } from "@/models/CartProduct";
+import { Bakery } from "@/models/Bakery";
 import { CartState, cartReducer, initialState } from "./cart-reducer";
 
 type ContextValue = CartState & {
-  addToCart: (product: CartProduct) => void;
+  addToCart: (product: CartProduct, bakery: Bakery) => void;
   removeFromCart: (productId: string) => void;
-  emptyCart: () => void;
+  resetCart: () => void;
 };
 
 const initialContext: ContextValue = {
-  bakeryId: "",
+  bakery: null,
   products: {},
-  addToCart: (product) => {},
+  addToCart: (product, bakery) => {},
   removeFromCart: (productId) => {},
-  emptyCart: () => {},
+  resetCart: () => {},
 };
 
 export const CartContext = createContext(initialContext);
 
 export const CartContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [cartState, dispatch] = useReducer(cartReducer, initialState);
-  const { bakeryId, products } = cartState;
+  const { bakery, products } = cartState;
 
-  const handleAddToCart = (product: CartProduct) => {
-    dispatch({ type: "ADD_TO_CART", payload: { product } });
+  const handleAddToCart = (product: CartProduct, bakery: Bakery) => {
+    dispatch({ type: "ADD_TO_CART", payload: { product, bakery } });
   };
 
   const handleRemoveFromCart = (productId: string) => {
@@ -31,15 +32,15 @@ export const CartContextProvider = ({ children }: { children: React.ReactNode })
   };
 
   const handleEmptyCart = () => {
-    dispatch({ type: "EMPTY_CART" });
+    dispatch({ type: "RESET_CART" });
   };
 
   const contextValue: ContextValue = {
-    bakeryId,
+    bakery,
     products,
     addToCart: handleAddToCart,
     removeFromCart: handleRemoveFromCart,
-    emptyCart: handleEmptyCart,
+    resetCart: handleEmptyCart,
   };
 
   return <CartContext.Provider value={contextValue}>{children}</CartContext.Provider>;

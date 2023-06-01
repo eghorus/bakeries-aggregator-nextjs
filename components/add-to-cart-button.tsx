@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { useRouter } from "next/router";
 import { Button, Flex, Input, useNumberInput } from "@chakra-ui/react";
 import { Product } from "@/models/Product";
+import { Bakery } from "@/models/Bakery";
 import { CartProduct } from "@/models/CartProduct";
 import { AuthContext } from "@/store/auth-context";
 import { CartContext } from "@/store/cart-context";
@@ -9,12 +10,13 @@ import useConfirmModal from "@/hooks/use-confirm-modal";
 
 type AddToCartButtonProps = {
   product: Product;
+  bakery: Bakery;
 };
 
-const AddToCartButton = ({ product }: AddToCartButtonProps) => {
+const AddToCartButton = ({ product, bakery }: AddToCartButtonProps) => {
   const router = useRouter();
   const { authUserId } = useContext(AuthContext);
-  const { bakeryId, addToCart } = useContext(CartContext);
+  const { bakery: bakeryInCart, addToCart } = useContext(CartContext);
   const { valueAsNumber, getInputProps, getIncrementButtonProps, getDecrementButtonProps } = useNumberInput({
     step: 1,
     defaultValue: 1,
@@ -36,7 +38,7 @@ const AddToCartButton = ({ product }: AddToCartButtonProps) => {
       return;
     }
 
-    if (bakeryId && bakeryId !== product.bakery) {
+    if (bakeryInCart && bakeryInCart.id !== product.bakery) {
       openConfirmModal({
         heading: "This is a different Order!",
         message: "You need to empty your cart first to start creating an order from another bakery shop.",
@@ -44,7 +46,7 @@ const AddToCartButton = ({ product }: AddToCartButtonProps) => {
       return;
     }
 
-    addToCart(cartProduct);
+    addToCart(cartProduct, bakery);
   };
 
   return (

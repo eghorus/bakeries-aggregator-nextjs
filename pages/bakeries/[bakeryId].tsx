@@ -39,7 +39,7 @@ export default function BakeryPage({ bakery }: BakeryPageProps) {
             title={title}
           />
 
-          <BakeryMenu categorizedProducts={categorizedProducts} />
+          <BakeryMenu bakery={bakery} categorizedProducts={categorizedProducts} />
         </chakra.section>
       </Flex>
     </>

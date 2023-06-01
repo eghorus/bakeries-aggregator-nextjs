@@ -1,14 +1,16 @@
 import Image from "next/image";
 import { Box, chakra, Flex } from "@chakra-ui/react";
 import { Product } from "@/models/Product";
+import { Bakery } from "@/models/Bakery";
 import { getImageUrl } from "@/helpers/url";
 import AddToCartButton from "../add-to-cart-button";
 
 type ProductCardProps = {
   product: Product;
+  bakery: Bakery;
 };
 
-const ProductCard = ({ product }: ProductCardProps) => {
+const ProductCard = ({ product, bakery }: ProductCardProps) => {
   const { image, price, title } = product;
   const imageUrl = getImageUrl(image);
 
@@ -36,7 +38,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
         <chakra.span mb="2" color="secondary.600" fontWeight="medium">
           {price} EGP
         </chakra.span>
-        <AddToCartButton product={product} />
+        <AddToCartButton product={product} bakery={bakery} />
       </Flex>
     </Flex>
   );
