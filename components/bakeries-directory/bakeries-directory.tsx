@@ -1,73 +1,21 @@
 import { Box, Flex, Grid, Heading, Text, chakra, useCheckboxGroup } from "@chakra-ui/react";
 import { Bakery } from "@/models/Bakery";
-import { Product } from "@/models/Product";
 import { hasAnyItemInCommon } from "@/helpers/array";
 import CategoryCheckbox from "./category-checkbox";
 import BakeryCard from "./bakery-card";
 
 type BakeriesDirectoryProps = {
-  bakeries: Bakery[];
-  adjustedBakeries: {
-    id: string;
-    title: string;
-    images: {
-      logo: string;
-      cover: string;
-    };
-    ratingAvg: number;
-    ratingQty: number;
-    products: Product[];
-    categories: string[];
-  }[];
+  bakeries: (Bakery & { categories: string[] })[];
   categories: string[];
 };
 
-const BakeriesDirectory = ({ bakeries, adjustedBakeries, categories }: BakeriesDirectoryProps) => {
+const BakeriesDirectory = ({ bakeries, categories }: BakeriesDirectoryProps) => {
   const { value: filteredCategories, getCheckboxProps } = useCheckboxGroup({ defaultValue: [] });
-  //
 
-  let adjbake: {
-    id: string;
-    title: string;
-    images: {
-      logo: string;
-      cover: string;
-    };
-    ratingAvg: number;
-    ratingQty: number;
-    products: Product[];
-    categories?: string[];
-  }[] = [...bakeries];
-  for (let i = 0; i < adjbake.length; i++) {
-    console.log(adjbake[i]);
-
-    const categories: Record<any, string> = {};
-
-    for (let j = 0; j < adjbake[i].products.length; j++) {
-      console.log(adjbake[i].products);
-
-      if (!categories[adjbake[i].products[j].category]) {
-        categories[adjbake[i].products[j].category] = adjbake[i].products[j].category;
-      }
-
-      adjbake[i].categories = Object.values(categories);
-    }
-  }
-  const adjBakeries = bakeries.map((b) => {
-    const categories: Record<any, string> = {};
-    b.products.map((p) => {
-      if (!categories[p.category]) {
-        categories[p.category] = p.category;
-      }
-      return p;
-    });
-    return { ...b, categories: Object.values(categories) };
-  });
-  //
   const filteredBakeries =
     filteredCategories.length > 0
-      ? adjustedBakeries.filter((b) => hasAnyItemInCommon(b.categories, filteredCategories))
-      : adjustedBakeries;
+      ? bakeries.filter((b) => hasAnyItemInCommon(b.categories, filteredCategories))
+      : bakeries;
 
   return (
     <>
