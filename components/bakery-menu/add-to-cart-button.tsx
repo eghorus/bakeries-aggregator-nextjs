@@ -24,13 +24,13 @@ const AddToCartButton = ({ product, bakery }: AddToCartButtonProps) => {
     max: 10,
   });
   const cartProduct: CartProduct = { ...product, quantity: valueAsNumber };
-  const { openConfirmModal, ConfirmModalComponent: ConfirmModal } = useConfirmModal(() =>
+  const { onOpen: onOpenConfirmModal, ConfirmModalComponent: ConfirmModal } = useConfirmModal(() =>
     router.push("/auth?form=signin")
   );
 
   const onAddToCart = () => {
     if (!authUserId) {
-      openConfirmModal({
+      onOpenConfirmModal({
         heading: "Plesae sign in",
         message: "You need to sign in or create a new account to starting adding products.",
         confirmButtonTitle: "Sign In",
@@ -39,7 +39,7 @@ const AddToCartButton = ({ product, bakery }: AddToCartButtonProps) => {
     }
 
     if (bakeryInCart && bakeryInCart.id !== product.bakery) {
-      openConfirmModal({
+      onOpenConfirmModal({
         heading: "This will be a different order",
         message:
           "You need to empty your cart or confirm your order first to start creating an order from another bakery shop.",
