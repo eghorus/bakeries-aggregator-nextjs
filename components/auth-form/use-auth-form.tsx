@@ -12,8 +12,8 @@ export type FormData = {
 const useAuthForm = (formType: "signin" | "signup") => {
   const defaultValues = {
     name: "",
-    email: "",
-    password: "",
+    email: "ahmed@mailsac.com",
+    password: "11111111",
   };
 
   const nameValidations = yup
@@ -42,8 +42,9 @@ const useAuthForm = (formType: "signin" | "signup") => {
 
   const {
     control,
-    register,
+    getValues,
     handleSubmit,
+    register,
     reset,
     formState: { isSubmitting, errors, dirtyFields },
   } = useForm<FormData>({
@@ -54,7 +55,7 @@ const useAuthForm = (formType: "signin" | "signup") => {
 
   const DevToolDrawer = () => <DevTool control={control} />;
 
-  return { register, handleSubmit, reset, isSubmitting, errors, modifiedFields: dirtyFields, DevToolDrawer };
+  return { getValues, handleSubmit, register, reset, isSubmitting, errors, modifiedFields: dirtyFields, DevToolDrawer };
 };
 
 export default useAuthForm;

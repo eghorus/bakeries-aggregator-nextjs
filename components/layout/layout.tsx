@@ -3,7 +3,7 @@ import { Box, Grid } from "@chakra-ui/react";
 import axios from "axios";
 import { AuthContext } from "@/store/auth-context";
 import { CurrentUserContext } from "@/store/current-user-context";
-import useModal from "@/hooks/use-modal-2";
+import useConfirmModal from "@/hooks/use-confirm-modal";
 import Header from "./header";
 import Footer from "./footer";
 
@@ -14,7 +14,7 @@ type LayoutProps = {
 const Layout = ({ children }: LayoutProps) => {
   const { authToken, authUserId } = useContext(AuthContext);
   const { setCurrentUser } = useContext(CurrentUserContext);
-  const { ModalComponent: Modal, handleOpenModal } = useModal();
+  const { onOpen: onOpenModal, ConfirmModalComponent: ModalComponent } = useConfirmModal();
 
   useEffect(() => {
     const getCurrentUser = async () => {
@@ -27,12 +27,12 @@ const Layout = ({ children }: LayoutProps) => {
         const { data } = response.data;
         setCurrentUser(data.user);
       } catch (error) {
-        handleOpenModal({ error });
+        onOpenModal({ error });
       }
     };
 
     if (authToken && authUserId) getCurrentUser();
-  }, [authToken, authUserId, setCurrentUser, handleOpenModal]);
+  }, [authToken, authUserId, setCurrentUser, onOpenModal]);
 
   return (
     <>
@@ -44,7 +44,7 @@ const Layout = ({ children }: LayoutProps) => {
         <Footer />
       </Grid>
 
-      <Modal />
+      <ModalComponent />
     </>
   );
 };

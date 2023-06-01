@@ -2,6 +2,7 @@ import { useContext } from "react";
 import NextLink from "next/link";
 import { Avatar, Button, Icon, chakra } from "@chakra-ui/react";
 import { MdLogout, MdOutlineReceiptLong } from "react-icons/md";
+import { RiShoppingBasketFill } from "react-icons/ri";
 import { CurrentUserContext } from "@/store/current-user-context";
 
 type SideDrawerNavigationItemsProps = {
@@ -23,10 +24,21 @@ const SideDrawerNavigationItems = ({ onSideDrawerClose }: SideDrawerNavigationIt
         variant="outline"
         leftIcon={<Icon as={MdOutlineReceiptLong} boxSize="5" />}
         w="full"
-        mb="auto"
+        mb="4"
         onClick={onSideDrawerClose}
       >
         My Orders
+      </Button>
+      <Button
+        as={NextLink}
+        href="/cart"
+        variant="outline"
+        leftIcon={<Icon as={RiShoppingBasketFill} boxSize="5" />}
+        w="full"
+        mb="auto"
+        onClick={onSideDrawerClose}
+      >
+        Cart
       </Button>
       <Button
         as={NextLink}

@@ -2,10 +2,10 @@ import { useContext } from "react";
 import { useRouter } from "next/router";
 import { Button, chakra } from "@chakra-ui/react";
 import { SubmitHandler } from "react-hook-form";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { AuthContext } from "@/store/auth-context";
 import useAuthForm, { FormData } from "./use-auth-form";
-import useModal from "@/hooks/use-modal-2";
+import useConfirmModal from "@/hooks/use-confirm-modal";
 import Input from "./input";
 
 type AuthFormProps = {
@@ -15,8 +15,9 @@ type AuthFormProps = {
 const AuthForm = ({ type }: AuthFormProps) => {
   const { storeAuthToken } = useContext(AuthContext);
   const router = useRouter();
-  const { register, handleSubmit, reset, isSubmitting, errors, modifiedFields, DevToolDrawer } = useAuthForm(type);
-  const { ModalComponent: Modal, handleOpenModal } = useModal();
+  const { getValues, handleSubmit, register, reset, isSubmitting, errors, modifiedFields, DevToolDrawer } =
+    useAuthForm(type);
+  const { onOpen: onOpenConfirmModal, ConfirmModalComponent } = useConfirmModal();
 
   const handleSignUp: SubmitHandler<FormData> = async (data) => {
     const { name, email, password } = data;
@@ -28,12 +29,9 @@ const AuthForm = ({ type }: AuthFormProps) => {
       });
       const { message } = response.data;
       reset();
-      handleOpenModal({
-        heading: "Account Created!",
-        body: message,
-      });
+      onOpenConfirmModal({ heading: "Account Created", message });
     } catch (error) {
-      handleOpenModal({ error });
+      onOpenConfirmModal({ error });
     }
   };
 
@@ -50,9 +48,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
       reset();
       router.push("/");
     } catch (error) {
-      let message = "Something went wrong. Please try again.";
-      if (error instanceof AxiosError) message = error.response?.data.message;
-      handleOpenModal({ error });
+      onOpenConfirmModal({ error });
     }
   };
 
@@ -63,6 +59,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
           <Input
             type="text"
             label="Full Name"
+            val={getValues().name || ""}
             isModified={Boolean(modifiedFields.name)}
             registerProps={register("name")}
             error={errors.name}
@@ -72,6 +69,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
         <Input
           type="text"
           label="Email"
+          val={getValues().email}
           isModified={Boolean(modifiedFields.email)}
           registerProps={register("email")}
           error={errors.email}
@@ -80,6 +78,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
         <Input
           type="password"
           label="Password"
+          val={getValues().password}
           isModified={Boolean(modifiedFields.password)}
           registerProps={register("password")}
           error={errors.password}
@@ -96,7 +95,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
         )}
       </chakra.form>
 
-      <Modal />
+      <ConfirmModalComponent />
 
       <DevToolDrawer />
     </>

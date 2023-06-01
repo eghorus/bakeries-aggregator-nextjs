@@ -17,13 +17,14 @@ import { createSlug } from "@/helpers/string";
 type InputProps = {
   type: "text" | "email" | "password";
   label: string;
+  val: string;
   isModified: boolean;
   registerProps: UseFormRegisterReturn;
   error: FieldError | undefined;
   size?: "xs" | "sm" | "md" | "lg";
 };
 
-const Input = ({ type, label, isModified = false, registerProps, error, size }: InputProps) => {
+const Input = ({ type, label, val, isModified, registerProps, error, size }: InputProps) => {
   const [isPasswordVisible, setIsPasswordVisible] = useBoolean();
   const id = useMemo(() => createSlug(label), [label]);
   const isAPasswordInput = label.toLowerCase().includes("password");
@@ -47,7 +48,7 @@ const Input = ({ type, label, isModified = false, registerProps, error, size }: 
     <FormControl
       isInvalid={Boolean(error)}
       position="relative"
-      sx={{ ...(isModified && floatedLabelStyles) }}
+      sx={{ ...(val && floatedLabelStyles) }}
       _focusWithin={floatedLabelStyles}
     >
       <FormLabel
