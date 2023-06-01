@@ -5,18 +5,17 @@ import CategoryCheckbox from "./category-checkbox";
 import BakeryCard from "./bakery-card";
 
 type BakeriesDirectoryProps = {
-  bakeries: Bakery[];
-  adjustedBakeries: (Bakery & { categories: string[] })[];
+  bakeries: (Bakery & { categories: string[] })[];
   categoryList: string[];
 };
 
-const BakeriesDirectory = ({ bakeries, adjustedBakeries, categoryList }: BakeriesDirectoryProps) => {
+const BakeriesDirectory = ({ bakeries, categoryList }: BakeriesDirectoryProps) => {
   const { value: filteredCategories, getCheckboxProps } = useCheckboxGroup({ defaultValue: [] });
 
   const filteredBakeries =
     filteredCategories.length > 0
-      ? adjustedBakeries.filter((b) => hasAnyItemInCommon(b.categories, filteredCategories))
-      : adjustedBakeries;
+      ? bakeries.filter((b) => hasAnyItemInCommon(b.categories, filteredCategories))
+      : bakeries;
 
   return (
     <>
@@ -44,10 +43,7 @@ const BakeriesDirectory = ({ bakeries, adjustedBakeries, categoryList }: Bakerie
           </Text>
           <Flex flexWrap="wrap" justifyContent="center" gap="2">
             {categoryList.map((c, i) => (
-              <>
-                Test
-                <CategoryCheckbox key={i} label={c} {...getCheckboxProps({ value: c })} />
-              </>
+              <CategoryCheckbox key={i} label={c} {...getCheckboxProps({ value: c })} />
             ))}
           </Flex>
         </Box>

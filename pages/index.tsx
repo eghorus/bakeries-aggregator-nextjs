@@ -6,12 +6,11 @@ import { Bakery } from "@/models/Bakery";
 import BakeriesDirectory from "@/components/bakeries-directory/bakeries-directory";
 
 type HomePageProps = {
-  bakeries: Bakery[];
-  adjustedBakeries: (Bakery & { categories: string[] })[];
+  bakeries: (Bakery & { categories: string[] })[];
   categoryList: string[];
 };
 
-export default function HomePage({ bakeries, adjustedBakeries, categoryList }: HomePageProps) {
+export default function HomePage({ bakeries, categoryList }: HomePageProps) {
   return (
     <>
       <Head>
@@ -19,7 +18,7 @@ export default function HomePage({ bakeries, adjustedBakeries, categoryList }: H
       </Head>
 
       <chakra.section maxW="container.lg" mx="auto" my="4">
-        <BakeriesDirectory bakeries={bakeries} adjustedBakeries={adjustedBakeries} categoryList={categoryList} />
+        <BakeriesDirectory bakeries={bakeries} categoryList={categoryList} />
       </chakra.section>
     </>
   );
@@ -42,15 +41,13 @@ export const getServerSideProps: GetServerSideProps<HomePageProps> = async () =>
     return { ...b, categories: Object.values(categories) };
   });
 
-  const categories: string[] = [];
-  adjustedBakeries.forEach((b) => categories.push(...b.categories));
-  // const categoryList = Array.from(new Set(categories));
-  const categoryList = categories;
+  const categories: { [key: string]: string } = {};
+  adjustedBakeries.forEach((b) => b.categories.forEach((c) => (categories[c] = c)));
+  const categoryList = Object.keys(categories);
 
   return {
     props: {
-      bakeries,
-      adjustedBakeries,
+      bakeries: adjustedBakeries,
       categoryList,
     },
   };
