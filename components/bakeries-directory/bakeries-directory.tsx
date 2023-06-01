@@ -10,14 +10,8 @@ type BakeriesDirectoryProps = {
   categoryList: string[];
 };
 
-const BakeriesDirectory = ({
-  bakeries,
-  adjustedBakeries,
-  categoryList = ["Cakes", "Bread", "Brownies & Bars", "Cookies", "Frosting", "Pies"],
-}: BakeriesDirectoryProps) => {
+const BakeriesDirectory = ({ bakeries, adjustedBakeries, categoryList }: BakeriesDirectoryProps) => {
   const { value: filteredCategories, getCheckboxProps } = useCheckboxGroup({ defaultValue: [] });
-
-  ["Cakes", "Bread", "Brownies & Bars", "Cookies", "Frosting", "Pies"];
 
   const filteredBakeries =
     filteredCategories.length > 0
@@ -50,7 +44,10 @@ const BakeriesDirectory = ({
           </Text>
           <Flex flexWrap="wrap" justifyContent="center" gap="2">
             {categoryList.map((c, i) => (
-              <CategoryCheckbox key={i} label={c} {...getCheckboxProps({ value: c })} />
+              <>
+                Test
+                <CategoryCheckbox key={i} label={c} {...getCheckboxProps({ value: c })} />
+              </>
             ))}
           </Flex>
         </Box>
