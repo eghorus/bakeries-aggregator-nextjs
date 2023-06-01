@@ -7,6 +7,7 @@ import axios from "axios";
 import { CartProduct } from "@/models/CartProduct";
 import { AuthContext } from "@/store/auth-context";
 import { CartContext } from "@/store/cart-context";
+import { getImageUrl } from "@/helpers/url";
 import OrderDetailsGrid from "@/components/elements/order-details-grid";
 
 const confirmOrderFetcher = async (
@@ -27,6 +28,7 @@ const CartProducts = () => {
   const { bakery, products, removeFromCart, resetCart } = useContext(CartContext);
   const { trigger, isMutating } = useSWRMutation([`/orders`, authToken], confirmOrderFetcher);
   const router = useRouter();
+  const logoImgSrc = getImageUrl(bakery?.images?.logo || "");
 
   const onConfirmOrder = async () => {
     const confirmOrderdata = {
@@ -47,7 +49,7 @@ const CartProducts = () => {
       ) : (
         <>
           <Flex alignItems="center" gap="4" mb="4" fontWeight="bold">
-            <Avatar src={""} name={bakery?.title} />
+            <Avatar src={logoImgSrc} name={bakery?.title} />
             <chakra.span>{bakery?.title}</chakra.span>
           </Flex>
 
