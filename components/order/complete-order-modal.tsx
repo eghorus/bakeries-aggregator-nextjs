@@ -75,7 +75,7 @@ const CompleteOrderModal = ({ orderId, isOpen, onClose }: CompleteOrderModalProp
             <Button colorScheme="blackAlpha" ref={cancelRef} onClick={onClose}>
               Cancel
             </Button>
-            <Button ml={4} isLoading={isMutating} onClick={onConfirm}>
+            <Button isLoading={isMutating} onClick={onConfirm} ml="4">
               Complete
             </Button>
           </AlertDialogFooter>

@@ -35,7 +35,7 @@ const ConfirmModal = ({ heading, message, confirmButtonTitle, onConfirm, onClose
               {confirmButtonTitle ? "Cancel" : "Ok"}
             </Button>
             {confirmButtonTitle && (
-              <Button onClick={onConfirm} ml={4}>
+              <Button onClick={onConfirm} ml="4">
                 {confirmButtonTitle}
               </Button>
             )}

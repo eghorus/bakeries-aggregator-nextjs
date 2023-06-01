@@ -7,22 +7,30 @@ type OrderActionsProps = {
 };
 
 const OrderActions = ({ orderId }: OrderActionsProps) => {
-  const { isOpen: isCompleteModalOpen, onOpen: onCompleteModalOpen, onClose: onCompleteModalClose } = useDisclosure();
-  const { isOpen: isCancelModalOpen, onOpen: onCancelModalOpen, onClose: onCancelModalClose } = useDisclosure();
+  const {
+    isOpen: isCompOrderModalOpen,
+    onOpen: onCompOrderModalOpen,
+    onClose: onCompOrderModalClose,
+  } = useDisclosure();
+  const {
+    isOpen: isCnclOrderModalOpen,
+    onOpen: onCnclOrderModalOpen,
+    onClose: onCnclOrderModalClose,
+  } = useDisclosure();
 
   return (
     <>
       <HStack>
-        <Button size="sm" variant="ghost" onClick={onCompleteModalOpen}>
+        <Button size="sm" variant="ghost" onClick={onCompOrderModalOpen}>
           Mark Completed
         </Button>
-        <Button colorScheme="blackAlpha" size="sm" variant="ghost" onClick={onCancelModalOpen}>
+        <Button colorScheme="blackAlpha" size="sm" variant="ghost" onClick={onCnclOrderModalOpen}>
           Cancel Order
         </Button>
       </HStack>
 
-      <CompleteOrderModal orderId={orderId} isOpen={isCompleteModalOpen} onClose={onCompleteModalClose} />
-      <CancelOrderModal orderId={orderId} isOpen={isCancelModalOpen} onClose={onCancelModalClose} />
+      <CompleteOrderModal orderId={orderId} isOpen={isCompOrderModalOpen} onClose={onCompOrderModalClose} />
+      <CancelOrderModal orderId={orderId} isOpen={isCnclOrderModalOpen} onClose={onCnclOrderModalClose} />
     </>
   );
 };

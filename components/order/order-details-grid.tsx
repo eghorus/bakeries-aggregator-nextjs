@@ -1,9 +1,9 @@
 import { chakra, Grid, GridProps } from "@chakra-ui/react";
 import { CartProduct } from "@/models/CartProduct";
 
-type OrderDetailsGridProps = {
+type OrderDetailsGridProps = GridProps & {
   products: CartProduct[];
-} & GridProps;
+};
 
 const GridItemHeader = ({ children }: { children: React.ReactNode }) => (
   <chakra.span borderBottom="1px" borderColor="blackAlpha.200" px="1" py="1" fontSize="xs" fontWeight="bold">

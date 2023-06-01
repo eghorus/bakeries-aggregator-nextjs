@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import Head from "next/head";
-import { Center, chakra, Flex, Heading, Skeleton, Spinner, Text } from "@chakra-ui/react";
+import { chakra, Flex, Heading, Skeleton, Text } from "@chakra-ui/react";
 import useSWR from "swr";
 import axios from "axios";
 import usePageProtect from "@/hooks/use-page-protect";
@@ -8,16 +8,16 @@ import { AuthContext } from "@/store/auth-context";
 import { OrderType } from "@/models/Order";
 import Order from "@/components/order/order";
 
-const getUserAccount = async ([path, authToken]: [string, string]) => {
+const getUserFetcher = async ([path, authToken]: [string, string]) => {
   const url = `${process.env.NEXT_PUBLIC_API_URL}${path}`;
   const res = await axios({ method: "GET", url, headers: { Authorization: `Bearer ${authToken}` } });
   return res.data.data.user;
 };
 
-export default function MyOrders() {
+export default function MyOrdersPage() {
   const { isCheckingAuth, LoadingSpinner } = usePageProtect({ allowed: "authenticated" });
   const { authToken } = useContext(AuthContext);
-  const { data: user, error, isLoading } = useSWR(["/users/account", authToken], getUserAccount);
+  const { data: user, error, isLoading } = useSWR(["/users/account", authToken], getUserFetcher);
 
   if (isCheckingAuth) return <LoadingSpinner />;
 
@@ -41,7 +41,7 @@ export default function MyOrders() {
         <Text mb="4" color="blackAlpha.700">
           Please mark active orders as completed after collecting it from the bakery shop.
         </Text>
-        <Text mb="4" color="secondary.700" fontSize="sm">
+        <Text mb="6" color="secondary.700" fontSize="sm">
           Click on each order to expand order details.
         </Text>
 
